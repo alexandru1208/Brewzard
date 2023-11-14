@@ -10,6 +10,9 @@ android {
 }
 
 dependencies {
+    implementation(libs.bundles.okhttp)
     implementation(libs.bundles.retrofit)
-    ksp(libs.moshi.codegen)
+    implementation(libs.moshi.kotlin)
+    ksp(libs.moshi.kotlin.codegen)
+    implementation(project(":domain"))
 }
