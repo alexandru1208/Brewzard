@@ -43,7 +43,8 @@ internal class BreweryMapper @Inject constructor(
                 throw DataSourceException(
                     RemoteError.MalformedDataError(exception)
                 )
-            }
+            },
+            isFavorite = false,
         )
     }
 
