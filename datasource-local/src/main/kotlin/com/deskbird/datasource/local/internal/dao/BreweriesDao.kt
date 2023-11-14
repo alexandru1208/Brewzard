@@ -17,7 +17,7 @@ internal interface BreweriesDao {
     fun isFavorite(breweryId: String): Boolean
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(brewery: BreweryEntity)
+    suspend fun insert(vararg brewery: BreweryEntity)
 
     @Delete
     suspend fun delete(brewery: BreweryEntity)
