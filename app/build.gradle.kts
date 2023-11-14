@@ -26,5 +26,6 @@ dependencies {
     implementation(project(":ui-design-system"))
     implementation(project(":domain"))
     implementation(project(":datasource-remote"))
+    implementation(project(":datasource-local"))
 
 }
