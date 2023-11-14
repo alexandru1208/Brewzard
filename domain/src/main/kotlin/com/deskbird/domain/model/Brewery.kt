@@ -8,4 +8,5 @@ data class Brewery(
     val type: BreweryType,
     val address: Address,
     val coordinates: Coordinates?,
+    val isFavorite: Boolean,
 )
