@@ -1,0 +1,37 @@
+plugins {
+    id "kotlin-android"
+    id "com.deskbird.versions"
+}
+
+android {
+    defaultConfig {
+        vectorDrawables.useSupportLibrary = true
+    }
+
+    lintOptions {
+        abortOnError true
+        warningsAsErrors true
+    }
+
+    kotlinOptions {
+        allWarningsAsErrors = true
+        jvmTarget = "1.8"
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+
+    compileSdkVersion project.properties.compileSdk
+
+    defaultConfig {
+        minSdkVersion project.properties.minSdk
+        targetSdkVersion project.properties.targetSdk
+    }
+}
+
+dependencies {
+    implementation libs.bundles.kotlin.coroutines
+}
