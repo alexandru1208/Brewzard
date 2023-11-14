@@ -10,6 +10,9 @@ internal class BreweryMapper @Inject constructor(
     private val breweryTypeMapper: BreweryTypeMapper
 ) {
 
+    fun mapFromDomain(breweries: List<Brewery>): List<BreweryEntity> =
+        breweries.map(::mapFromDomain)
+
     fun mapFromDomain(brewery: Brewery): BreweryEntity = with(brewery) {
         BreweryEntity(
             id = id,
@@ -28,7 +31,8 @@ internal class BreweryMapper @Inject constructor(
         )
     }
 
-    fun mapToDomain(breweries: List<BreweryEntity>): List<Brewery> = breweries.map(::mapToDomain)
+    fun mapToDomain(breweries: List<BreweryEntity>): List<Brewery> =
+        breweries.map(::mapToDomain)
 
     fun mapToDomain(brewery: BreweryEntity): Brewery = with(brewery) {
         Brewery(
