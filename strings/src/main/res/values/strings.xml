@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="micro">Micro</string>
+    <string name="nano">Nano</string>
+    <string name="regional">Regional</string>
+    <string name="brewpub">Brewpub</string>
+    <string name="large">Large</string>
+    <string name="planning">Planning</string>
+    <string name="bar">Bar</string>
+    <string name="contract">Contract</string>
+    <string name="proprietor">Proprietor</string>
+    <string name="closed">Closed</string>
+    <string name="breweries">Breweries</string>
+    <string name="favorites">Favorites</string>
+    <string name="brewery_type">Brewery type:</string>
+    <string name="all_types">All types</string>
+</resources>

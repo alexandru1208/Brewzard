@@ -1,8 +1,7 @@
 plugins {
-    id("com.deskbird.android.lib")
-    id("com.deskbird.android.di")
+    id("com.deskbird.android.brewzard.feature.domain")
 }
 
 android {
-    namespace = "com.deskbird.breweries.list"
+    namespace = "com.deskbird.strings"
 }

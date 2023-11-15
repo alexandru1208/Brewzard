@@ -9,12 +9,11 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class AppActivity : ComponentActivity() {
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window, false)
-        setContent {
-            BrewzardThemeWithBackground {}
-
-        }
+        setContent { BrewzardThemeWithBackground { AppNavigation() } }
     }
 }
