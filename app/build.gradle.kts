@@ -29,4 +29,5 @@ dependencies {
     implementation(project(":datasource-remote"))
     implementation(project(":datasource-local"))
     implementation(project(":feature-breweries-list:ui"))
+    implementation(project(":feature-breweries-favorites-list:ui"))
 }
