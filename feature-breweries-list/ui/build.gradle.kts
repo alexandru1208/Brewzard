@@ -1,9 +1,11 @@
 plugins {
-    id("com.deskbird.android.lib")
-    id("com.deskbird.android.di")
-    id("com.deskbird.android.compose")
+    id("com.deskbird.android.brewzard.feature.ui")
 }
 
 android {
     namespace = "com.deskbird.breweries.list.ui"
+}
+
+dependencies{
+    implementation(project(":feature-breweries-list:domain"))
 }

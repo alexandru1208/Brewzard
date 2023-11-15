@@ -41,7 +41,8 @@ class BreweriesRepository @Inject constructor(
 
     private fun updateFavorites(breweries: List<Brewery>) {
         applicationScope.launch {
-            localDatasource.addOrUpdateFavorites(*breweries.toTypedArray())
+            val favoriteBreweries = breweries.filter { it.isFavorite }
+            localDatasource.addOrUpdateFavorites(*favoriteBreweries.toTypedArray())
         }
     }
 }

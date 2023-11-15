@@ -24,8 +24,9 @@ android {
 
 dependencies {
     implementation(project(":ui-design-system"))
+    implementation(project(":strings"))
     implementation(project(":domain"))
     implementation(project(":datasource-remote"))
     implementation(project(":datasource-local"))
-
+    implementation(project(":feature-breweries-list:ui"))
 }

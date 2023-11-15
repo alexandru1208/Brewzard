@@ -1,9 +1,6 @@
 package com.deskbird.datasource.local.internal.mapper
 
-import com.deskbird.domain.error.DataSourceException
-import com.deskbird.domain.error.RemoteError
 import com.deskbird.domain.model.BreweryType
-import java.lang.IllegalArgumentException
 import javax.inject.Inject
 
 internal class BreweryTypeMapper @Inject constructor() {

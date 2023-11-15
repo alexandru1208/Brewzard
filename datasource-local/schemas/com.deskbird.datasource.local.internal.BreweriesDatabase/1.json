@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "7b519120259f7231c98a403797908f84",
+    "identityHash": "147d18d006b242e65178839fe22a9262",
     "entities": [
       {
         "tableName": "breweries",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `name` TEXT NOT NULL, `brewery_type` TEXT NOT NULL, `city` TEXT NOT NULL, `state_province` TEXT NOT NULL, `postal_code` TEXT NOT NULL, `country` TEXT NOT NULL, `latitude` REAL, `longitude` REAL, `phone` TEXT NOT NULL, `website_url` TEXT, `street` TEXT NOT NULL, `state` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `name` TEXT NOT NULL, `brewery_type` TEXT NOT NULL, `city` TEXT NOT NULL, `state_province` TEXT NOT NULL, `postal_code` TEXT NOT NULL, `country` TEXT NOT NULL, `latitude` REAL, `longitude` REAL, `phone` TEXT, `website_url` TEXT, `street` TEXT, `state` TEXT NOT NULL, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -66,7 +66,7 @@
             "fieldPath": "phone",
             "columnName": "phone",
             "affinity": "TEXT",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "websiteUrl",
@@ -78,7 +78,7 @@
             "fieldPath": "street",
             "columnName": "street",
             "affinity": "TEXT",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "state",
@@ -100,7 +100,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '7b519120259f7231c98a403797908f84')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '147d18d006b242e65178839fe22a9262')"
     ]
   }
 }
