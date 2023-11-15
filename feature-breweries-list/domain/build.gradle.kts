@@ -3,5 +3,5 @@ plugins {
 }
 
 android {
-    namespace = "com.deskbird.strings"
+    namespace = "com.deskbird.breweries.list"
 }
