@@ -22,6 +22,7 @@ dependencyResolutionManagement {
 
 rootProject.name = "Brewzard"
 include(":app")
+include(":strings")
 include(":domain")
 include(":datasource-remote")
 include(":datasource-local")

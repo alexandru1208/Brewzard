@@ -17,9 +17,9 @@ internal data class BreweryApi(
     val country: String,
     val latitude: String?,
     val longitude: String?,
-    val phone: String,
+    val phone: String?,
     @Json(name = "website_url")
     val websiteUrl: String?,
-    val street: String,
+    val street: String?,
     val state: String
 )

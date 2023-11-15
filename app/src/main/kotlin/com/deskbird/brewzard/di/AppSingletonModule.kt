@@ -1,4 +1,4 @@
-package com.deskbird.brewzard.ui
+package com.deskbird.brewzard.di
 
 import com.deskbird.domain.util.DispatchersProvider
 import dagger.Module

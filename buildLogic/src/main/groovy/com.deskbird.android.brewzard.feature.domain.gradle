@@ -1,0 +1,9 @@
+plugins {
+    id "com.deskbird.android.lib"
+    id "com.deskbird.android.di"
+}
+
+dependencies {
+    implementation libs.androidx.lifecycle.viewmodel.ktx
+    implementation project(":domain")
+}

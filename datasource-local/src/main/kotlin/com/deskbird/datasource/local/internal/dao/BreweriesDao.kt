@@ -14,13 +14,11 @@ internal interface BreweriesDao {
     suspend fun getAll(): List<BreweryEntity>
 
     @Query("SELECT EXISTS(SELECT * FROM breweries WHERE id = :breweryId)")
-    fun isFavorite(breweryId: String): Boolean
+    suspend fun isFavorite(breweryId: String): Boolean
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(vararg brewery: BreweryEntity)
 
     @Delete
     suspend fun delete(brewery: BreweryEntity)
-
-
 }

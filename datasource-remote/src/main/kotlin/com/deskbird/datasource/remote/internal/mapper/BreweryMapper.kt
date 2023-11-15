@@ -1,6 +1,5 @@
 package com.deskbird.datasource.remote.internal.mapper
 
-import com.deskbird.datasource.remote.internal.errors.NetworkExceptionMapper
 import com.deskbird.datasource.remote.internal.model.BreweryApi
 import com.deskbird.domain.error.DataSourceException
 import com.deskbird.domain.error.RemoteError
