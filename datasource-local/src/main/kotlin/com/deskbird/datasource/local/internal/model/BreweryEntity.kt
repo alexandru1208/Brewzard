@@ -18,9 +18,9 @@ internal data class BreweryEntity(
     val country: String,
     val latitude: Float?,
     val longitude: Float?,
-    val phone: String,
+    val phone: String?,
     @ColumnInfo(name = "website_url")
     val websiteUrl: String?,
-    val street: String,
+    val street: String?,
     val state: String,
 )

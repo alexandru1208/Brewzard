@@ -1,0 +1,13 @@
+plugins {
+    id "com.deskbird.android.lib"
+    id "com.deskbird.android.di"
+    id "com.deskbird.android.compose"
+}
+
+dependencies {
+    implementation libs.kotlin.collections.immutable
+    implementation project(":domain")
+    implementation project(":ui-design-system")
+    implementation project(":ui-util")
+    implementation project(":strings")
+}
