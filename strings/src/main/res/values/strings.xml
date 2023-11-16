@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="micro">Micro</string>
-    <string name="nano">Nano</string>
-    <string name="regional">Regional</string>
-    <string name="brewpub">Brewpub</string>
-    <string name="large">Large</string>
-    <string name="planning">Planning</string>
-    <string name="bar">Bar</string>
-    <string name="contract">Contract</string>
-    <string name="proprietor">Proprietor</string>
-    <string name="closed">Closed</string>
-    <string name="breweries">Breweries</string>
-    <string name="favorites">Favorites</string>
+    <string name="back_description">Back</string>
+    <string name="micro_type">Micro</string>
+    <string name="nano_type">Nano</string>
+    <string name="regional_type">Regional</string>
+    <string name="brewpub_type">Brewpub</string>
+    <string name="large_type">Large</string>
+    <string name="planning_type">Planning</string>
+    <string name="bar_type">Bar</string>
+    <string name="contract_type">Contract</string>
+    <string name="proprietor_type">Proprietor</string>
+    <string name="closed_type">Closed</string>
+    <string name="breweries_type">Breweries</string>
+    <string name="favorites_type">Favorites</string>
     <string name="brewery_type">Brewery type:</string>
     <string name="all_types">All types</string>
+    <string name="missing_phone_call_permission">Permission for making phone call was not granted.\nYou can go to settings and grant the permission.</string>
+    <string name="cannot_make_phone_call">Phone call cannot be performed.\nPlease make sure that your device has phone calls support.</string>
+    <string name="cannot_open_website">Webpage cannot be open.\nPlease make sure that you have a browser installed on your device.</string>
+    <string name="cannot_show_on_map">Cannot show on map.\nPlease make sure that you have a maps app installed on your device.</string>
 </resources>

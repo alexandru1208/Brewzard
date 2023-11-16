@@ -30,4 +30,5 @@ dependencies {
     implementation(project(":datasource-local"))
     implementation(project(":feature-breweries-list:ui"))
     implementation(project(":feature-breweries-favorites-list:ui"))
+    implementation(project(":feature-breweries-details:ui"))
 }

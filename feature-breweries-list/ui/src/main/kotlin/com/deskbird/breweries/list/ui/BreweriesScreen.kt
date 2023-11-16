@@ -31,7 +31,7 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.deskbird.breweries.list.BreweriesListViewModel
-import com.deskbird.breweries.list.BreweriesScreenNavEvent
+import com.deskbird.breweries.list.BreweriesListEvent
 import com.deskbird.breweries.list.ui.model.StableBreweriesScreenState
 import com.deskbird.breweries.list.ui.model.StableBreweryType
 import com.deskbird.breweries.list.ui.model.toStable
@@ -49,11 +49,11 @@ import kotlinx.coroutines.flow.filterNotNull
 @Composable
 fun BreweriesScreen(onNavigateToDetails: (String) -> Unit) {
     val viewModel = hiltViewModel<BreweriesListViewModel>()
-    val state by viewModel.screenState.collectAsState()
+    val state by viewModel.state.collectAsState()
     val stableState = state.toStable()
-    ObserveAsEvents(flow = viewModel.navEvents) {
+    ObserveAsEvents(flow = viewModel.events) {
         when (it) {
-            is BreweriesScreenNavEvent.GoToDetails -> onNavigateToDetails(it.breweryId)
+            is BreweriesListEvent.GoToDetails -> onNavigateToDetails(it.breweryId)
         }
     }
     BreweriesScreenContent(
@@ -69,7 +69,7 @@ fun BreweriesScreen(onNavigateToDetails: (String) -> Unit) {
 private fun BreweriesScreenContent(
     state: StableBreweriesScreenState,
     onBreweryClick: (String) -> Unit = {},
-    onFavoriteClick: (String) -> Unit = {},
+    onFavoriteClick: (String, Boolean) -> Unit = { _, _ -> },
     onTypeSelected: (StableBreweryType?) -> Unit = {},
     onItemVisible: (Int) -> Unit = {}
 ) {
@@ -100,9 +100,9 @@ private fun BreweriesScreenContent(
                         BreweryCard(name = brewery.name,
                             city = brewery.city,
                             country = brewery.country,
-                            breweryType = brewery.breweryType.name,
+                            breweryType = brewery.breweryType,
                             isFavorite = brewery.isFavorite,
-                            onFavoriteClick = { onFavoriteClick(brewery.id) },
+                            onFavoriteClick = { onFavoriteClick(brewery.id, brewery.isFavorite) },
                             onClick = { onBreweryClick(brewery.id) })
                     }
                 }

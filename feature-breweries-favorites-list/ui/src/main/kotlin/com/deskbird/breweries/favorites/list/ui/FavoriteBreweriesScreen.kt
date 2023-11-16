@@ -14,7 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.deskbird.breweries.favorites.list.FavoriteBreweriesScreenNavEvent
+import com.deskbird.breweries.favorites.list.FavoriteBreweriesEvent
 import com.deskbird.breweries.favorites.list.FavoriteBreweriesViewModel
 import com.deskbird.breweries.favorites.list.ui.model.StableFavoriteBreweriesScreenState
 import com.deskbird.breweries.favorites.list.ui.model.toStable
@@ -27,11 +27,11 @@ import com.deskbird.ui.util.ObserveAsEvents
 @Composable
 fun FavoriteBreweriesScreen(onNavigateToDetails: (String) -> Unit) {
     val viewModel = hiltViewModel<FavoriteBreweriesViewModel>()
-    val state by viewModel.screenState.collectAsState()
+    val state by viewModel.state.collectAsState()
     val stableState = state.toStable()
-    ObserveAsEvents(flow = viewModel.navEvents) {
+    ObserveAsEvents(flow = viewModel.events) {
         when (it) {
-            is FavoriteBreweriesScreenNavEvent.GoToDetails -> onNavigateToDetails(it.breweryId)
+            is FavoriteBreweriesEvent.GoToDetails -> onNavigateToDetails(it.breweryId)
         }
     }
     BreweriesScreenContent(
@@ -61,7 +61,7 @@ private fun BreweriesScreenContent(
                     BreweryCard(name = brewery.name,
                         city = brewery.city,
                         country = brewery.country,
-                        breweryType = brewery.breweryType.name,
+                        breweryType = brewery.breweryType,
                         isFavorite = brewery.isFavorite,
                         onFavoriteClick = { onFavoriteClick(brewery.id) },
                         onClick = { onBreweryClick(brewery.id) })

@@ -1,6 +1,6 @@
 package com.deskbird.datasource.local.internal
 
-import com.deskbird.datasource.local.internal.dao.BreweriesDao
+import com.deskbird.datasource.local.internal.dao.BreweryDao
 import com.deskbird.datasource.local.internal.mapper.BreweryMapper
 import com.deskbird.domain.data.LocalBreweriesDataSource
 import com.deskbird.domain.model.Brewery
@@ -12,30 +12,44 @@ import javax.inject.Singleton
 @Singleton
 internal class LocalBreweriesDataSourceImpl @Inject constructor(
     private val dispatchersProvider: DispatchersProvider,
-    private val breweriesDao: BreweriesDao,
+    private val breweryDao: BreweryDao,
     private val breweryMapper: BreweryMapper
 ) : LocalBreweriesDataSource {
 
     override suspend fun isFavorite(breweryId: String): Boolean {
-        return breweriesDao.isFavorite(breweryId)
+        return breweryDao.isFavorite(breweryId)
     }
 
-    override suspend fun addOrUpdateFavorites(
+    override suspend fun getBrewery(
+        breweryId: String
+    ): Brewery? = withContext(dispatchersProvider.io) {
+        val breweryEntity = breweryDao.getBrewery(breweryId)
+        return@withContext breweryEntity?.let(breweryMapper::mapToDomain)
+    }
+
+    override suspend fun updateFavorites(
         vararg brewery: Brewery
     ) = withContext(dispatchersProvider.io) {
         val breweries = breweryMapper.mapFromDomain(brewery.asList())
-        breweriesDao.insert(*breweries.toTypedArray())
+        breweryDao.update(*breweries.toTypedArray())
+    }
+
+    override suspend fun addToFavorites(
+        brewery: Brewery
+    ) = withContext(dispatchersProvider.io) {
+        val breweryEntity = breweryMapper.mapFromDomain(brewery)
+        breweryDao.insert(breweryEntity)
     }
 
     override suspend fun removeFromFavorites(
         brewery: Brewery
     ) = withContext(dispatchersProvider.io) {
         val breweriesEntity = breweryMapper.mapFromDomain(brewery)
-        breweriesDao.delete(breweriesEntity)
+        breweryDao.delete(breweriesEntity)
     }
 
-    override suspend fun getFavorites(): List<Brewery> {
-        val breweryEntities = breweriesDao.getAll()
-        return breweryMapper.mapToDomain(breweryEntities)
+    override suspend fun getFavorites(): List<Brewery> = withContext(dispatchersProvider.io) {
+        val breweryEntities = breweryDao.getAll()
+        return@withContext breweryMapper.mapToDomain(breweryEntities)
     }
 }
