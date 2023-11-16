@@ -2,7 +2,7 @@ package com.deskbird.breweries.favorites.list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.deskbird.domain.repository.BreweriesRepository
+import com.deskbird.domain.repository.BreweryRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,14 +14,14 @@ import javax.inject.Inject
 
 @HiltViewModel
 class FavoriteBreweriesViewModel @Inject constructor(
-    private val breweriesRepository: BreweriesRepository,
+    private val breweryRepository: BreweryRepository,
 ) : ViewModel() {
 
-    private val _navEvents = Channel<FavoriteBreweriesScreenNavEvent>()
-    val navEvents = _navEvents.receiveAsFlow()
+    private val _events = Channel<FavoriteBreweriesEvent>()
+    val events = _events.receiveAsFlow()
 
-    private val _screenState = MutableStateFlow(FavoriteBreweriesScreenState())
-    val screenState = _screenState.asStateFlow()
+    private val _state = MutableStateFlow(FavoriteBreweriesScreenState())
+    val state = _state.asStateFlow()
 
     init {
         fetchFavorites()
@@ -29,13 +29,13 @@ class FavoriteBreweriesViewModel @Inject constructor(
 
     private fun fetchFavorites() {
         viewModelScope.launch {
-            _screenState.update {
+            _state.update {
                 it.copy(
                     progressIndicatorVisible = true
                 )
             }
-            val breweries = breweriesRepository.getFavorites()
-            _screenState.update {
+            val breweries = breweryRepository.getFavorites()
+            _state.update {
                 it.copy(
                     breweries = breweries,
                     progressIndicatorVisible = false
@@ -46,15 +46,15 @@ class FavoriteBreweriesViewModel @Inject constructor(
 
     fun onBreweryClick(breweryId: String) {
         viewModelScope.launch {
-            _navEvents.send(FavoriteBreweriesScreenNavEvent.GoToDetails(breweryId))
+            _events.send(FavoriteBreweriesEvent.GoToDetails(breweryId))
         }
     }
 
     fun onFavoriteClick(breweryId: String) {
         viewModelScope.launch {
-            screenState.value.breweries.find { it.id == breweryId }?.let { brewery ->
-                breweriesRepository.removeFromFavorites(brewery)
-                _screenState.update { oldState ->
+            state.value.breweries.find { it.id == breweryId }?.let { brewery ->
+                breweryRepository.removeFromFavorites(brewery)
+                _state.update { oldState ->
                     oldState.copy(breweries = oldState.breweries.filter { it.id != breweryId })
                 }
             }
