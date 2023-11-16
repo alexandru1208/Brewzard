@@ -35,7 +35,7 @@ private fun Brewery.toStable() = StableBreweryItem(
     name = name,
     city = address.city,
     country = address.country,
-    breweryType = type.toStable(),
+    breweryType = type.toStable().name,
     isFavorite = isFavorite,
 )
 
@@ -44,7 +44,7 @@ internal data class StableBreweryItem(
     val name: String,
     val city: String,
     val country: String,
-    val breweryType: StableBreweryType,
+    val breweryType: String,
     val isFavorite: Boolean,
 )
 
@@ -55,20 +55,20 @@ data class StableBreweryType(
 
 @Composable
 @ReadOnlyComposable
-internal fun BreweryType.toStable() = StableBreweryType(
+private fun BreweryType.toStable() = StableBreweryType(
     index = this.ordinal,
     name = stringResource(
         id = when (this) {
-            BreweryType.MICRO -> R.string.micro
-            BreweryType.NANO -> R.string.nano
-            BreweryType.REGIONAL -> R.string.regional
-            BreweryType.BREWPUB -> R.string.brewpub
-            BreweryType.LARGE -> R.string.large
-            BreweryType.PLANNING -> R.string.planning
-            BreweryType.BAR -> R.string.bar
-            BreweryType.CONTRACT -> R.string.contract
-            BreweryType.PROPRIETOR -> R.string.proprietor
-            BreweryType.CLOSED -> R.string.closed
+            BreweryType.MICRO -> R.string.micro_type
+            BreweryType.NANO -> R.string.nano_type
+            BreweryType.REGIONAL -> R.string.regional_type
+            BreweryType.BREWPUB -> R.string.brewpub_type
+            BreweryType.LARGE -> R.string.large_type
+            BreweryType.PLANNING -> R.string.planning_type
+            BreweryType.BAR -> R.string.bar_type
+            BreweryType.CONTRACT -> R.string.contract_type
+            BreweryType.PROPRIETOR -> R.string.proprietor_type
+            BreweryType.CLOSED -> R.string.closed_type
         }
     )
 )

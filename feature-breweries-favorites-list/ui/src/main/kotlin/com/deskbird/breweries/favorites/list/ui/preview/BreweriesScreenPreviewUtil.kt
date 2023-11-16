@@ -3,7 +3,6 @@ package com.deskbird.breweries.favorites.list.ui.preview
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import com.deskbird.breweries.favorites.list.ui.model.StableFavoriteBreweriesScreenState
 import com.deskbird.breweries.favorites.list.ui.model.StableBreweryItem
-import com.deskbird.breweries.favorites.list.ui.model.StableBreweryType
 import kotlinx.collections.immutable.toImmutableList
 import kotlin.random.Random.Default.nextBoolean
 
@@ -11,7 +10,7 @@ private fun createPreviewBreweries(count: Int) = (1..count).map {
     StableBreweryItem(
         id = "brewery$it",
         name = "Brewery $it",
-        breweryType = StableBreweryType(it, "Type $it"),
+        breweryType = "Type $it",
         country = "Country $it",
         city = "City $it",
         isFavorite = nextBoolean()
@@ -19,7 +18,7 @@ private fun createPreviewBreweries(count: Int) = (1..count).map {
     )
 }.toImmutableList()
 
-private fun createPreviewPickerUiState(
+private fun createUiState(
     progressVisible: Boolean = false,
     errorVisible: Boolean = false,
     nrOfBreweries: Int = 10,
@@ -32,8 +31,8 @@ private fun createPreviewPickerUiState(
 internal class FavoriteBreweriesScreenPreviewDataProvider :
     PreviewParameterProvider<StableFavoriteBreweriesScreenState> {
     override val values = sequenceOf(
-        createPreviewPickerUiState(),
-        createPreviewPickerUiState(progressVisible = true),
-        createPreviewPickerUiState(errorVisible = true),
+        createUiState(),
+        createUiState(progressVisible = true),
+        createUiState(errorVisible = true),
     )
 }
