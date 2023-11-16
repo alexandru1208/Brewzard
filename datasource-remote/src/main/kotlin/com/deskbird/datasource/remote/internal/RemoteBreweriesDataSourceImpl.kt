@@ -33,10 +33,12 @@ internal class RemoteBreweriesDataSourceImpl @Inject constructor(
 
     override suspend fun getBreweries(
         page: Int,
+        pageSize: Int,
         type: BreweryType?
     ): List<Brewery> = withContext(dispatchersProvider.io) {
         val breweriesApi = apiService.getBreweries(
             page = page,
+            pageSize = pageSize,
             type = type?.let(breweryTypeMapper::mapFromDomain)
         )
         return@withContext breweryMapper.mapToDomain(breweriesApi)

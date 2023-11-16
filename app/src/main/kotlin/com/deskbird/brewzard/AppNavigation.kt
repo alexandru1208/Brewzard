@@ -10,32 +10,57 @@ import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarDuration
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import androidx.navigation.NavDestination.Companion.hierarchy
+import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navigation
+import com.deskbird.breweries.details.ui.BreweryDetailsScreen
 import com.deskbird.breweries.favorites.list.ui.FavoriteBreweriesScreen
 import com.deskbird.breweries.list.ui.BreweriesScreen
 import com.deskbird.designsystem.theme.BrewzardThemeWithBackground
 import com.deskbird.designsystem.util.DevicePreview
+import kotlinx.coroutines.launch
 
 val bottomNavItems = listOf(
-    BottomNavScreen.Breweries,
-    BottomNavScreen.Favorites,
+    BottomNavDestination.Breweries,
+    BottomNavDestination.Favorites,
 )
 
 @Composable
 fun AppNavigation() {
     val navController = rememberNavController()
+    val scope = rememberCoroutineScope()
+    val snackbarHostState = remember { SnackbarHostState() }
+    val showSnackbarMessage = { message: String ->
+        scope.launch {
+            snackbarHostState
+                .showSnackbar(
+                    message = message,
+                    duration = SnackbarDuration.Long
+                )
+        }
+        Unit
+    }
     Scaffold(
+        snackbarHost = {
+            SnackbarHost(hostState = snackbarHostState)
+        },
         bottomBar = {
             BottomNavigation(
                 modifier = Modifier
@@ -78,19 +103,61 @@ fun AppNavigation() {
     ) { innerPadding ->
         NavHost(
             navController,
-            startDestination = BottomNavScreen.Breweries.route,
+            startDestination = BottomNavDestination.Breweries.route,
             Modifier.padding(innerPadding)
         ) {
-            composable(BottomNavScreen.Breweries.route) {
-                BreweriesScreen {
+            breweriesGraph(
+                navController = navController,
+                onShowMessage = showSnackbarMessage
+            )
+            favoritesGraph(
+                navController = navController,
+                onShowMessage = showSnackbarMessage
+            )
+        }
+    }
+}
 
-                }
+private fun NavGraphBuilder.breweriesGraph(
+    navController: NavController,
+    onShowMessage: (String) -> Unit
+) {
+    navigation(
+        startDestination = Screen.Breweries.route,
+        route = BottomNavDestination.Breweries.route
+    ) {
+        composable(route = Screen.Breweries.route) {
+            BreweriesScreen {
+                navController.navigate(Screen.Details.Brewery.createRoute(it))
             }
-            composable(BottomNavScreen.Favorites.route) {
-                FavoriteBreweriesScreen {
+        }
+        composable(route = Screen.Details.Brewery.route) {
+            BreweryDetailsScreen(
+                onShowMessage = onShowMessage,
+                onBackClick = navController::navigateUp
+            )
+        }
+    }
+}
 
-                }
+private fun NavGraphBuilder.favoritesGraph(
+    navController: NavController,
+    onShowMessage: (String) -> Unit
+) {
+    navigation(
+        startDestination = Screen.Favorites.route,
+        route = BottomNavDestination.Favorites.route
+    ) {
+        composable(route = Screen.Favorites.route) {
+            FavoriteBreweriesScreen {
+                navController.navigate(Screen.Details.Favorite.createRoute(it))
             }
+        }
+        composable(route = Screen.Details.Favorite.route) {
+            BreweryDetailsScreen(
+                onShowMessage = onShowMessage,
+                onBackClick = navController::navigateUp
+            )
         }
     }
 }

@@ -9,5 +9,5 @@ interface RemoteBreweriesDataSource {
 
     suspend fun getBreweries(ids: List<String>): List<Brewery>
 
-    suspend fun getBreweries(page: Int, type: BreweryType? = null): List<Brewery>
+    suspend fun getBreweries(page: Int, pageSize: Int, type: BreweryType? = null): List<Brewery>
 }
