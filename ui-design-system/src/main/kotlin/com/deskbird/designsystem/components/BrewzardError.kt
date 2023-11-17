@@ -20,27 +20,26 @@ import com.deskbird.strings.R
 fun BrewzardError(
     modifier: Modifier = Modifier,
     message: String,
-    onTryAgainClick: () -> Unit = {}
+    onTryAgainClick: () -> Unit = {},
 ) = Column(
     modifier = modifier.padding(16.dp),
     verticalArrangement = spacedBy(16.dp),
-    horizontalAlignment = Alignment.CenterHorizontally
+    horizontalAlignment = Alignment.CenterHorizontally,
 ) {
     Text(
         textAlign = TextAlign.Center,
         text = stringResource(id = R.string.something_went_wrong),
         style = typography.titleLarge,
-        color = colorScheme.error
+        color = colorScheme.error,
     )
     Text(
         textAlign = TextAlign.Center,
         text = message,
         style = typography.bodyLarge,
-        color = colorScheme.error
+        color = colorScheme.error,
     )
     BrewzardButton(text = stringResource(id = R.string.try_again), onClick = onTryAgainClick)
 }
-
 
 @Composable
 @Preview

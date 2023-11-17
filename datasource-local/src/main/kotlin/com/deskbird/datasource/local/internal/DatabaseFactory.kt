@@ -6,12 +6,12 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
 internal class DatabaseFactory @Inject constructor(
-    @ApplicationContext private val context: Context
+    @ApplicationContext private val context: Context,
 ) {
 
     fun create() = Room.databaseBuilder(
         context = context,
         klass = BreweriesDatabase::class.java,
-        name = "favorite_breweries"
+        name = "favorite_breweries",
     ).build()
 }

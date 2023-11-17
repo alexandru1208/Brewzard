@@ -21,7 +21,7 @@ internal data class StableBreweryDetailsScreenState(
 internal fun BreweryDetailsScreenState.toStable() = StableBreweryDetailsScreenState(
     brewery = brewery?.toStable(),
     progressIndicatorVisible = progressIndicatorVisible,
-    errorVisible = errorVisible
+    errorVisible = errorVisible,
 )
 
 internal data class StableBrewery(
@@ -43,7 +43,7 @@ private fun Brewery.toStable() = StableBrewery(
     type = type.toStable(),
     address = address.toStable(),
     coordinates = coordinates?.toStable(),
-    isFavorite = isFavorite
+    isFavorite = isFavorite,
 )
 
 internal data class StableAddress(
@@ -61,22 +61,22 @@ private fun Address.toStable() = StableAddress(
     stateProvince = stateProvince,
     state = state,
     country = country,
-    postalCode = postalCode
+    postalCode = postalCode,
 )
 
 internal data class StableCoordinates(
     val latitude: Float,
-    val longitude: Float
+    val longitude: Float,
 )
 
 private fun Coordinates.toStable() = StableCoordinates(
     latitude = latitude,
-    longitude = longitude
+    longitude = longitude,
 )
 
 internal data class StableBreweryType(
     val name: String,
-    val description: String
+    val description: String,
 )
 
 @Composable
@@ -94,7 +94,7 @@ private fun BreweryType.toStable() = StableBreweryType(
             BreweryType.CONTRACT -> R.string.contract_type
             BreweryType.PROPRIETOR -> R.string.proprietor_type
             BreweryType.CLOSED -> R.string.closed_type
-        }
+        },
     ), description = stringResource(
         id = when (this) {
             BreweryType.MICRO -> R.string.micro_type_description
@@ -107,6 +107,6 @@ private fun BreweryType.toStable() = StableBreweryType(
             BreweryType.CONTRACT -> R.string.contract_type_description
             BreweryType.PROPRIETOR -> R.string.proprietor_type_description
             BreweryType.CLOSED -> R.string.closed_type_description
-        }
-    )
+        },
+    ),
 )

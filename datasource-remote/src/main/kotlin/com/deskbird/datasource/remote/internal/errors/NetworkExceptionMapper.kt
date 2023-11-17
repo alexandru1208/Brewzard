@@ -1,6 +1,5 @@
 package com.deskbird.datasource.remote.internal.errors
 
-
 import com.deskbird.domain.error.DataSourceException
 import com.deskbird.domain.error.RemoteError
 import retrofit2.HttpException

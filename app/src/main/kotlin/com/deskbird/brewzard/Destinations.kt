@@ -14,18 +14,18 @@ sealed interface Destination {
 sealed class BottomNavDestination(
     override val route: String,
     @StringRes val resourceId: Int,
-    val icon: ImageVector
+    val icon: ImageVector,
 ) : Destination {
     data object Breweries : BottomNavDestination(
         "breweries_graph",
         R.string.breweries_type,
-        Icons.Filled.List
+        Icons.Filled.List,
     )
 
     data object Favorites : BottomNavDestination(
         "favorites_graph",
         R.string.favorites_type,
-        Icons.Filled.Favorite
+        Icons.Filled.Favorite,
     )
 }
 
@@ -51,4 +51,3 @@ sealed interface Screen : Destination {
         data object Favorite : Details("favorite-details")
     }
 }
-

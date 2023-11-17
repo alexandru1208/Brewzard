@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.Arrangement.spacedBy
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.windowInsetsPadding
@@ -25,7 +24,7 @@ import com.deskbird.breweries.favorites.list.ui.model.toStable
 import com.deskbird.breweries.favorites.list.ui.preview.FavoriteBreweriesScreenPreviewDataProvider
 import com.deskbird.designsystem.components.BreweryCard
 import com.deskbird.designsystem.theme.BrewzardThemeWithBackground
-import com.deskbird.designsystem.util.DevicePreview
+import com.deskbird.designsystem.util.DevicesPreview
 import com.deskbird.ui.util.ObserveAsEvents
 
 @Composable
@@ -63,13 +62,15 @@ private fun BreweriesScreenContent(
         ) {
             state.breweries.forEach { brewery ->
                 item(key = brewery.id) {
-                    BreweryCard(name = brewery.name,
+                    BreweryCard(
+                        name = brewery.name,
                         city = brewery.city,
                         country = brewery.country,
                         breweryType = brewery.breweryType,
                         isFavorite = brewery.isFavorite,
                         onFavoriteClick = { onFavoriteClick(brewery.id) },
-                        onClick = { onBreweryClick(brewery.id) })
+                        onClick = { onBreweryClick(brewery.id) },
+                    )
                 }
             }
         }
@@ -79,9 +80,9 @@ private fun BreweriesScreenContent(
     }
 }
 
-
 @Composable
-@DevicePreview
+@DevicesPreview
 private fun Preview(
-    @PreviewParameter(FavoriteBreweriesScreenPreviewDataProvider::class) data: StableFavoriteBreweriesScreenState,
+    @PreviewParameter(FavoriteBreweriesScreenPreviewDataProvider::class)
+    data: StableFavoriteBreweriesScreenState,
 ) = BrewzardThemeWithBackground { BreweriesScreenContent(state = data) }

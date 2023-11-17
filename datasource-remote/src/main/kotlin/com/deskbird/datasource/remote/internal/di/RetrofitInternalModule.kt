@@ -10,7 +10,7 @@ import dagger.hilt.components.SingletonComponent
 @InstallIn(SingletonComponent::class)
 internal abstract class RetrofitInternalModule {
 
-    companion object{
+    companion object {
         @Provides
         fun provideApiService(factory: ApiServiceFactory) = factory.create()
     }

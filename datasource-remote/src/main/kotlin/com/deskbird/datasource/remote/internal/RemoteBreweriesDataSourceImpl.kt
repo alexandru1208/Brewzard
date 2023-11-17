@@ -15,17 +15,17 @@ internal class RemoteBreweriesDataSourceImpl @Inject constructor(
     private val dispatchersProvider: DispatchersProvider,
     private val apiService: ApiService,
     private val breweryTypeMapper: BreweryTypeMapper,
-    private val breweryMapper: BreweryMapper
+    private val breweryMapper: BreweryMapper,
 ) : RemoteBreweriesDataSource {
     override suspend fun getBrewery(
-        id: String
+        id: String,
     ): Brewery = withContext(dispatchersProvider.io) {
         val breweryApi = apiService.getBrewery(id)
         return@withContext breweryMapper.mapToDomain(breweryApi)
     }
 
     override suspend fun getBreweries(
-        ids: List<String>
+        ids: List<String>,
     ): List<Brewery> = withContext(dispatchersProvider.io) {
         val breweriesApi = apiService.getBreweries(ids.joinToString(","))
         return@withContext breweryMapper.mapToDomain(breweriesApi)
@@ -34,12 +34,12 @@ internal class RemoteBreweriesDataSourceImpl @Inject constructor(
     override suspend fun getBreweries(
         page: Int,
         pageSize: Int,
-        type: BreweryType?
+        type: BreweryType?,
     ): List<Brewery> = withContext(dispatchersProvider.io) {
         val breweriesApi = apiService.getBreweries(
             page = page,
             pageSize = pageSize,
-            type = type?.let(breweryTypeMapper::mapFromDomain)
+            type = type?.let(breweryTypeMapper::mapFromDomain),
         )
         return@withContext breweryMapper.mapToDomain(breweriesApi)
     }

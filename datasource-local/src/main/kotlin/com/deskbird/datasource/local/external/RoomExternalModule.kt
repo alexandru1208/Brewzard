@@ -13,6 +13,6 @@ abstract class RoomExternalModule {
 
     @Binds
     internal abstract fun bindLocalBreweriesDataSource(
-        impl: LocalBreweriesDataSourceImpl
+        impl: LocalBreweriesDataSourceImpl,
     ): LocalBreweriesDataSource
 }

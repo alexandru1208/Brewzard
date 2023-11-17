@@ -8,4 +8,3 @@ data class Address(
     val country: String,
     val postalCode: String,
 )
-
