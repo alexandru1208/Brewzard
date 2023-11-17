@@ -5,6 +5,10 @@ import com.deskbird.datasource.local.internal.mapper.BreweryMapper
 import com.deskbird.domain.data.LocalBreweriesDataSource
 import com.deskbird.domain.model.Brewery
 import com.deskbird.domain.util.DispatchersProvider
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -48,8 +52,8 @@ internal class LocalBreweriesDataSourceImpl @Inject constructor(
         breweryDao.delete(breweriesEntity)
     }
 
-    override suspend fun getFavorites(): List<Brewery> = withContext(dispatchersProvider.io) {
-        val breweryEntities = breweryDao.getAll()
-        return@withContext breweryMapper.mapToDomain(breweryEntities)
-    }
+    override fun observeFavorites(): Flow<List<Brewery>> =
+        breweryDao.observeAll()
+            .map(breweryMapper::mapToDomain)
+            .flowOn(dispatchersProvider.io)
 }
