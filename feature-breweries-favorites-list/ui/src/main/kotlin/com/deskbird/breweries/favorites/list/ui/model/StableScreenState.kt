@@ -13,7 +13,7 @@ import kotlinx.collections.immutable.toImmutableList
 internal data class StableFavoriteBreweriesScreenState(
     val breweries: ImmutableList<StableBreweryItem>,
     val progressIndicatorVisible: Boolean,
-    val errorVisible: Boolean
+    val errorVisible: Boolean,
 )
 
 @Composable
@@ -46,7 +46,7 @@ internal data class StableBreweryItem(
 
 data class StableBreweryType(
     val index: Int,
-    val name: String
+    val name: String,
 )
 
 @Composable
@@ -63,5 +63,5 @@ private fun BreweryType.toStable() = stringResource(
         BreweryType.CONTRACT -> R.string.contract_type
         BreweryType.PROPRIETOR -> R.string.proprietor_type
         BreweryType.CLOSED -> R.string.closed_type
-    }
+    },
 )

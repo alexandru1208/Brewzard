@@ -37,7 +37,7 @@ fun BreweryCard(
         Row(
             modifier = Modifier.padding(16.dp),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = spacedBy(8.dp)
+            horizontalArrangement = spacedBy(8.dp),
         ) {
             Column(modifier = Modifier.weight(1.0f), verticalArrangement = spacedBy(4.dp)) {
                 Text(text = name, style = typography.headlineSmall)
@@ -52,13 +52,12 @@ fun BreweryCard(
                         Icons.Outlined.FavoriteBorder
                     },
                     contentDescription = null,
-                    tint = colorScheme.primary
+                    tint = colorScheme.primary,
                 )
             }
         }
     }
 }
-
 
 @Composable
 @Preview(name = "Not favorite brewery")
@@ -68,7 +67,7 @@ private fun NotFavoritePreview() = BrewzardTheme {
         city = "Norman",
         country = "United States",
         breweryType = "Micro",
-        isFavorite = false
+        isFavorite = false,
     )
 }
 
@@ -80,6 +79,6 @@ private fun FavoritePreview() = BrewzardTheme {
         city = "Norman",
         country = "United States",
         breweryType = "Micro",
-        isFavorite = true
+        isFavorite = true,
     )
 }

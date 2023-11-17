@@ -10,7 +10,7 @@ import androidx.compose.ui.tooling.preview.Preview
 @Preview(
     name = "Pixel 7 Portrait Night",
     device = "id:pixel_7",
-    uiMode = Configuration.UI_MODE_NIGHT_YES
+    uiMode = Configuration.UI_MODE_NIGHT_YES,
 )
 @Preview(
     name = "Pixel 7 Landscape",
@@ -18,7 +18,7 @@ import androidx.compose.ui.tooling.preview.Preview
 )
 @Preview(
     name = "Nexus S Portrait",
-    device = "spec:parent=Nexus S"
+    device = "spec:parent=Nexus S",
 )
 @Preview(
     name = "Pixel C Portrait",
@@ -26,6 +26,6 @@ import androidx.compose.ui.tooling.preview.Preview
 )
 @Preview(
     name = "Pixel C Landscape",
-    device = "spec:parent=pixel_c"
+    device = "spec:parent=pixel_c",
 )
-annotation class DevicePreview
+annotation class DevicesPreview

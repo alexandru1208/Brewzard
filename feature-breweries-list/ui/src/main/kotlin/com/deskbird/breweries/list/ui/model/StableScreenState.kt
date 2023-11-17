@@ -15,7 +15,7 @@ internal data class StableBreweriesScreenState(
     val selectedType: StableBreweryType?,
     val breweries: ImmutableList<StableBreweryItem>,
     val progressIndicatorVisible: Boolean,
-    val errorVisible: Boolean
+    val errorVisible: Boolean,
 )
 
 @Composable
@@ -50,7 +50,7 @@ internal data class StableBreweryItem(
 
 data class StableBreweryType(
     val index: Int,
-    val name: String
+    val name: String,
 )
 
 @Composable
@@ -69,6 +69,6 @@ private fun BreweryType.toStable() = StableBreweryType(
             BreweryType.CONTRACT -> R.string.contract_type
             BreweryType.PROPRIETOR -> R.string.proprietor_type
             BreweryType.CLOSED -> R.string.closed_type
-        }
-    )
+        },
+    ),
 )

@@ -68,7 +68,7 @@ private val LightColorScheme = lightColorScheme(
 @Composable
 fun BrewzardTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
     val colorScheme = when {
         darkTheme -> DarkColorScheme
@@ -85,18 +85,18 @@ fun BrewzardTheme(
 
     MaterialTheme(
         colorScheme = colorScheme,
-        content = content
+        content = content,
     )
 }
 
 @Composable
 fun BrewzardThemeWithBackground(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) = BrewzardTheme(darkTheme) {
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = colorScheme.background,
-        content = content
+        content = content,
     )
 }

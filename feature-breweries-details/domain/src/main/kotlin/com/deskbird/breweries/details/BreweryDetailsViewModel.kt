@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.deskbird.domain.di.BreweryId
 import com.deskbird.domain.error.DataSourceException
-import com.deskbird.domain.model.Coordinates
 import com.deskbird.domain.repository.BreweryRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
@@ -36,7 +35,7 @@ class BreweryDetailsViewModel @Inject constructor(
             _state.update {
                 it.copy(
                     progressIndicatorVisible = true,
-                    errorVisible = false
+                    errorVisible = false,
                 )
             }
             try {
@@ -51,7 +50,7 @@ class BreweryDetailsViewModel @Inject constructor(
                 _state.update {
                     it.copy(
                         progressIndicatorVisible = false,
-                        errorVisible = true
+                        errorVisible = true,
                     )
                 }
             }

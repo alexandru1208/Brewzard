@@ -39,7 +39,7 @@ import com.deskbird.breweries.details.ui.BreweryDetailsScreen
 import com.deskbird.breweries.favorites.list.ui.FavoriteBreweriesScreen
 import com.deskbird.breweries.list.ui.BreweriesScreen
 import com.deskbird.designsystem.theme.BrewzardThemeWithBackground
-import com.deskbird.designsystem.util.DevicePreview
+import com.deskbird.designsystem.util.DevicesPreview
 import kotlinx.coroutines.launch
 
 val bottomNavItems = listOf(
@@ -57,7 +57,7 @@ fun AppNavigation() {
             snackbarHostState
                 .showSnackbar(
                     message = message,
-                    duration = SnackbarDuration.Long
+                    duration = SnackbarDuration.Long,
                 )
         }
         Unit
@@ -72,7 +72,7 @@ fun AppNavigation() {
                     .background(colorScheme.primaryContainer)
                     .windowInsetsPadding(WindowInsets.navigationBars),
                 backgroundColor = colorScheme.primaryContainer,
-                elevation = 0.dp
+                elevation = 0.dp,
             ) {
                 val navBackStackEntry by navController.currentBackStackEntryAsState()
                 val currentDestination = navBackStackEntry?.destination
@@ -91,7 +91,7 @@ fun AppNavigation() {
                             Icon(
                                 screen.icon,
                                 contentDescription = null,
-                                tint = contentColor
+                                tint = contentColor,
                             )
                         },
                         label = {
@@ -105,11 +105,11 @@ fun AppNavigation() {
                                 launchSingleTop = true
                                 restoreState = true
                             }
-                        }
+                        },
                     )
                 }
             }
-        }
+        },
     ) { innerPadding ->
         NavHost(
             navController,
@@ -119,17 +119,17 @@ fun AppNavigation() {
                     top = 0.dp,
                     bottom = innerPadding.calculateBottomPadding(),
                     start = innerPadding.calculateStartPadding(LayoutDirection.Ltr),
-                    end = innerPadding.calculateEndPadding(LayoutDirection.Ltr)
-                )
-            )
+                    end = innerPadding.calculateEndPadding(LayoutDirection.Ltr),
+                ),
+            ),
         ) {
             breweriesGraph(
                 navController = navController,
-                onShowMessage = showSnackbarMessage
+                onShowMessage = showSnackbarMessage,
             )
             favoritesGraph(
                 navController = navController,
-                onShowMessage = showSnackbarMessage
+                onShowMessage = showSnackbarMessage,
             )
         }
     }
@@ -137,24 +137,24 @@ fun AppNavigation() {
 
 private fun NavGraphBuilder.breweriesGraph(
     navController: NavController,
-    onShowMessage: (String) -> Unit
+    onShowMessage: (String) -> Unit,
 ) {
     navigation(
         startDestination = Screen.Breweries.route,
-        route = BottomNavDestination.Breweries.route
+        route = BottomNavDestination.Breweries.route,
     ) {
         composable(route = Screen.Breweries.route) {
             BreweriesScreen(
                 onNavigateToDetails = {
                     navController.navigate(Screen.Details.Brewery.createRoute(it))
                 },
-                onShowMessage = onShowMessage
+                onShowMessage = onShowMessage,
             )
         }
         composable(route = Screen.Details.Brewery.route) {
             BreweryDetailsScreen(
                 onShowMessage = onShowMessage,
-                onBackClick = navController::navigateUp
+                onBackClick = navController::navigateUp,
             )
         }
     }
@@ -162,11 +162,11 @@ private fun NavGraphBuilder.breweriesGraph(
 
 private fun NavGraphBuilder.favoritesGraph(
     navController: NavController,
-    onShowMessage: (String) -> Unit
+    onShowMessage: (String) -> Unit,
 ) {
     navigation(
         startDestination = Screen.Favorites.route,
-        route = BottomNavDestination.Favorites.route
+        route = BottomNavDestination.Favorites.route,
     ) {
         composable(route = Screen.Favorites.route) {
             FavoriteBreweriesScreen {
@@ -176,13 +176,13 @@ private fun NavGraphBuilder.favoritesGraph(
         composable(route = Screen.Details.Favorite.route) {
             BreweryDetailsScreen(
                 onShowMessage = onShowMessage,
-                onBackClick = navController::navigateUp
+                onBackClick = navController::navigateUp,
             )
         }
     }
 }
 
-@DevicePreview
+@DevicesPreview
 @Composable
 private fun Preview() = BrewzardThemeWithBackground {
     AppNavigation()

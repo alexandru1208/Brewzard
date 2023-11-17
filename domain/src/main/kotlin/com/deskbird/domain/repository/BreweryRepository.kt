@@ -11,7 +11,6 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.supervisorScope
 import javax.inject.Inject
@@ -19,13 +18,13 @@ import javax.inject.Inject
 class BreweryRepository @Inject constructor(
     @ApplicationScope private val applicationScope: CoroutineScope,
     private val localDatasource: LocalBreweriesDataSource,
-    private val remoteDataSource: RemoteBreweriesDataSource
+    private val remoteDataSource: RemoteBreweriesDataSource,
 ) {
 
     suspend fun getBreweries(
         page: Int,
         pageSize: Int,
-        type: BreweryType? = null
+        type: BreweryType? = null,
     ) = supervisorScope {
         val remoteBreweries = remoteDataSource.getBreweries(page, pageSize, type)
         val updatedBreweries = remoteBreweries.map {

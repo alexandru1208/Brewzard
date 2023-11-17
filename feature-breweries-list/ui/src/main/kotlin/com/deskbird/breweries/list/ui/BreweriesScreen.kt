@@ -42,7 +42,7 @@ import com.deskbird.breweries.list.ui.preview.BreweriesScreenPreviewDataProvider
 import com.deskbird.designsystem.components.BreweryCard
 import com.deskbird.designsystem.components.BrewzardError
 import com.deskbird.designsystem.theme.BrewzardThemeWithBackground
-import com.deskbird.designsystem.util.DevicePreview
+import com.deskbird.designsystem.util.DevicesPreview
 import com.deskbird.domain.model.BreweryType
 import com.deskbird.strings.R
 import com.deskbird.ui.util.ObserveAsEvents
@@ -53,7 +53,7 @@ import kotlinx.coroutines.flow.filterNotNull
 @Composable
 fun BreweriesScreen(
     onNavigateToDetails: (String) -> Unit,
-    onShowMessage: (String) -> Unit
+    onShowMessage: (String) -> Unit,
 ) {
     val viewModel = hiltViewModel<BreweriesListViewModel>()
     val state by viewModel.state.collectAsState()
@@ -71,7 +71,7 @@ fun BreweriesScreen(
         onFavoriteClick = viewModel::onFavoriteClick,
         onTypeSelected = { viewModel.onTypeSelected(it?.index?.let(BreweryType.entries::get)) },
         onItemVisible = viewModel::onItemVisible,
-        onTryAgainClick = viewModel::onTryAgainClick
+        onTryAgainClick = viewModel::onTryAgainClick,
     )
 }
 
@@ -98,7 +98,7 @@ private fun BreweriesScreenContent(
                 modifier = Modifier.fillMaxWidth(),
                 types = state.breweryTypes,
                 selectedType = state.selectedType,
-                onTypeSelected = onTypeSelected
+                onTypeSelected = onTypeSelected,
             )
 
             val listState = rememberLazyListState()
@@ -115,7 +115,7 @@ private fun BreweriesScreenContent(
                             breweryType = brewery.breweryType,
                             isFavorite = brewery.isFavorite,
                             onFavoriteClick = { onFavoriteClick(brewery.id, brewery.isFavorite) },
-                            onClick = { onBreweryClick(brewery.id) })
+                            onClick = { onBreweryClick(brewery.id) },)
                     }
                 }
             }
@@ -136,7 +136,7 @@ private fun BreweriesScreenContent(
             BrewzardError(
                 modifier = Modifier.align(Alignment.Center),
                 message = stringResource(id = R.string.fetch_breweries_error_message),
-                onTryAgainClick = onTryAgainClick
+                onTryAgainClick = onTryAgainClick,
             )
         }
     }
@@ -148,11 +148,11 @@ private fun BreweryTypePicker(
     modifier: Modifier = Modifier,
     types: ImmutableList<StableBreweryType>,
     selectedType: StableBreweryType?,
-    onTypeSelected: (StableBreweryType?) -> Unit
+    onTypeSelected: (StableBreweryType?) -> Unit,
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = spacedBy(16.dp)
+        horizontalArrangement = spacedBy(16.dp),
     ) {
         var isExpanded by rememberSaveable { mutableStateOf(false) }
 
@@ -172,18 +172,18 @@ private fun BreweryTypePicker(
                 colors = ExposedDropdownMenuDefaults.textFieldColors(),
                 modifier = Modifier
                     .fillMaxWidth()
-                    .menuAnchor()
+                    .menuAnchor(),
             )
             ExposedDropdownMenu(
                 expanded = isExpanded,
-                onDismissRequest = { isExpanded = false }
+                onDismissRequest = { isExpanded = false },
             ) {
                 DropdownMenuItem(
                     text = { Text(text = stringResource(id = R.string.all_types)) },
                     onClick = {
                         onTypeSelected(null)
                         isExpanded = false
-                    }
+                    },
                 )
                 types.forEach {
                     DropdownMenuItem(
@@ -191,7 +191,7 @@ private fun BreweryTypePicker(
                         onClick = {
                             onTypeSelected(it)
                             isExpanded = false
-                        }
+                        },
                     )
                 }
             }
@@ -199,9 +199,8 @@ private fun BreweryTypePicker(
     }
 }
 
-
 @Composable
-@DevicePreview
+@DevicesPreview
 private fun Preview(
     @PreviewParameter(BreweriesScreenPreviewDataProvider::class) data: StableBreweriesScreenState,
 ) = BrewzardThemeWithBackground { BreweriesScreenContent(state = data) }

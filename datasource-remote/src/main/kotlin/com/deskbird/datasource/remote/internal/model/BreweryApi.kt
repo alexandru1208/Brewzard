@@ -21,5 +21,5 @@ internal data class BreweryApi(
     @Json(name = "website_url")
     val websiteUrl: String?,
     val street: String?,
-    val state: String
+    val state: String,
 )
