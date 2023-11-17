@@ -56,8 +56,6 @@ fun BreweryCard(
                 )
             }
         }
-
-
     }
 }
 

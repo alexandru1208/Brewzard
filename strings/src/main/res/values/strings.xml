@@ -35,4 +35,9 @@
     <string name="cannot_make_phone_call">Phone call cannot be performed.\nPlease make sure that your device has phone calls support.</string>
     <string name="cannot_open_website">Webpage cannot be open.\nPlease make sure that you have a browser installed on your device.</string>
     <string name="cannot_show_on_map">Cannot show on map.\nPlease make sure that you have a maps app installed on your device.</string>
+    <string name="something_went_wrong">Something went wrong.</string>
+    <string name="try_again">Try again</string>
+    <string name="details_error_message">We were not able to fetch the details for your brewery. Please check your internet connection and try again!</string>
+    <string name="fetch_more_breweries_error_message">We were not able to fetch more breweries. Please check your internet connection!</string>
+    <string name="fetch_breweries_error_message">We were not able to fetch the breweries. Please check your internet connection!\n\nIn the meantime you can always check your favorite breweries offline.</string>
 </resources>

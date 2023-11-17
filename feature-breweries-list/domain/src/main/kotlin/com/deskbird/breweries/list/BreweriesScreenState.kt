@@ -8,5 +8,6 @@ data class BreweriesScreenState(
     val selectedType: BreweryType? = null,
     val breweries: List<Brewery> = emptyList(),
     val progressIndicatorVisible: Boolean = false,
-    val errorVisible: Boolean = false
+    val errorVisible: Boolean = false,
+    val fetchMoreErrorVisible: Boolean = false,
 )

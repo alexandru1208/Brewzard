@@ -5,6 +5,9 @@ plugins {
 
 android {
     namespace = "com.deskbird.ui.designsystem"
+}
 
+dependencies {
+    implementation(project(":strings"))
 }
 
