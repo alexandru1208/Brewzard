@@ -1,7 +1,8 @@
+@file:Suppress("MagicNumber")
+
 package com.deskbird.designsystem.theme
 
 import androidx.compose.ui.graphics.Color
-
 
 // Light
 val PrimaryLight = Color(0xFF0061a4)

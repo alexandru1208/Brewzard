@@ -10,5 +10,5 @@ enum class BreweryType {
     BAR,
     CONTRACT,
     PROPRIETOR,
-    CLOSED
+    CLOSED,
 }

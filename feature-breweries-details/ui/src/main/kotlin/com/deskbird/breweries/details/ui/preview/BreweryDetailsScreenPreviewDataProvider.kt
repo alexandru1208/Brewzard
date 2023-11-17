@@ -23,7 +23,7 @@ private fun createPreviewBrewery(isFavorite: Boolean) = StableBrewery(
     phone = "4058160490",
     type = StableBreweryType(
         name = "Micro",
-        description = "Most craft breweries. For example, Samual Adams is still considered a micro brewery."
+        description = "Most craft breweries. For example, Samual Adams is still considered a micro brewery.",
     ),
     address = StableAddress(
         street = "1716 Topeka St",
@@ -31,13 +31,13 @@ private fun createPreviewBrewery(isFavorite: Boolean) = StableBrewery(
         stateProvince = "Oklahoma",
         country = "United States",
         state = "Oklahoma",
-        postalCode = "73069-8224"
+        postalCode = "73069-8224",
     ),
     coordinates = StableCoordinates(
         latitude = 35.25739f,
-        longitude = -97.468185f
+        longitude = -97.468185f,
     ),
-    isFavorite = isFavorite
+    isFavorite = isFavorite,
 )
 
 internal class BreweryDetailsScreenPreviewDataProvider :

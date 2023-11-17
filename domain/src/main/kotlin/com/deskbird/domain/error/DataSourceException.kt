@@ -10,7 +10,7 @@ class DataSourceException(error: DataSourceError) : RuntimeException() {
 }
 
 fun <T> Flow<T>.catchDataSourceException(
-    action: suspend FlowCollector<T>.(exception: DataSourceException) -> Unit
+    action: suspend FlowCollector<T>.(exception: DataSourceException) -> Unit,
 ) = catch {
     if (it is DataSourceException) {
         action(it)

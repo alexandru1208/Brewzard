@@ -1,7 +1,5 @@
 package com.deskbird.breweries.details
 
-import com.deskbird.domain.model.Coordinates
-
 sealed interface BreweryDetailsEvent {
     data class GoToWebsite(val url: String) : BreweryDetailsEvent
     data class Call(val phoneNumber: String) : BreweryDetailsEvent

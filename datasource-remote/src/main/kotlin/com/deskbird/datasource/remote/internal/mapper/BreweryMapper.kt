@@ -9,7 +9,7 @@ import com.deskbird.domain.model.Coordinates
 import javax.inject.Inject
 
 internal class BreweryMapper @Inject constructor(
-    private val breweryTypeMapper: BreweryTypeMapper
+    private val breweryTypeMapper: BreweryTypeMapper,
 ) {
 
     fun mapToDomain(breweries: List<BreweryApi>): List<Brewery> = breweries.map(::mapToDomain)
@@ -27,24 +27,23 @@ internal class BreweryMapper @Inject constructor(
                 stateProvince = stateProvince,
                 state = state,
                 country = country,
-                postalCode = postalCode
+                postalCode = postalCode,
             ),
             coordinates = try {
                 latitude?.let { lat ->
                     longitude?.let { long ->
                         Coordinates(
                             latitude = lat.toFloat(),
-                            longitude = long.toFloat()
+                            longitude = long.toFloat(),
                         )
                     }
                 }
             } catch (exception: NumberFormatException) {
                 throw DataSourceException(
-                    RemoteError.MalformedDataError(exception)
+                    RemoteError.MalformedDataError(exception),
                 )
             },
             isFavorite = false,
         )
     }
-
 }
