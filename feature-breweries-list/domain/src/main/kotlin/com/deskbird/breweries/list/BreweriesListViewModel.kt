@@ -47,15 +47,21 @@ class BreweriesListViewModel @Inject constructor(
         }
     }
 
-    private fun fetchBreweries(page: Int, type: BreweryType? = null) {
+
+    private fun fetchBreweries(
+        page: Int,
+        type: BreweryType? = null
+    ) {
         if (type != state.value.selectedType) {
             pages.clear()
         }
         viewModelScope.launch {
             _state.update {
                 it.copy(
+                    selectedType = type,
                     breweries = pages.flatMap { page -> page.value },
-                    progressIndicatorVisible = true
+                    progressIndicatorVisible = true,
+                    errorVisible = false,
                 )
             }
 
@@ -64,18 +70,21 @@ class BreweriesListViewModel @Inject constructor(
                 pages[page] = breweries
                 _state.update {
                     it.copy(
-                        selectedType = type,
                         breweries = pages.flatMap { page -> page.value },
                         progressIndicatorVisible = false
                     )
                 }
             } catch (exception: DataSourceException) {
-                _state.update {
-                    it.copy(
-                        selectedType = type,
-                        errorVisible = true,
-                        progressIndicatorVisible = false
-                    )
+                if (pages.isEmpty()) {
+                    _state.update {
+                        it.copy(
+                            errorVisible = true,
+                            progressIndicatorVisible = false
+                        )
+                    }
+                } else {
+                    _state.update { it.copy(progressIndicatorVisible = false) }
+                    _events.send(BreweriesListEvent.ShowFetchMoreError)
                 }
             }
         }
@@ -116,6 +125,10 @@ class BreweriesListViewModel @Inject constructor(
                 )
             }
         }
+    }
+
+    fun onTryAgainClick() {
+        fetchBreweries(page = FIRST_PAGE_NUMBER, type = state.value.selectedType)
     }
 
     companion object {

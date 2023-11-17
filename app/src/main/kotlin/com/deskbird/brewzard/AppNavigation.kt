@@ -144,9 +144,12 @@ private fun NavGraphBuilder.breweriesGraph(
         route = BottomNavDestination.Breweries.route
     ) {
         composable(route = Screen.Breweries.route) {
-            BreweriesScreen {
-                navController.navigate(Screen.Details.Brewery.createRoute(it))
-            }
+            BreweriesScreen(
+                onNavigateToDetails = {
+                    navController.navigate(Screen.Details.Brewery.createRoute(it))
+                },
+                onShowMessage = onShowMessage
+            )
         }
         composable(route = Screen.Details.Brewery.route) {
             BreweryDetailsScreen(
