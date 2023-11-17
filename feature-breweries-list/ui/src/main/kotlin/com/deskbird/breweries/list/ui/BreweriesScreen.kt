@@ -139,7 +139,7 @@ private fun BreweryTypePicker(
     ) {
         var isExpanded by rememberSaveable { mutableStateOf(false) }
 
-        Text(text = stringResource(id = R.string.brewery_type))
+        Text(text = "${stringResource(id = R.string.brewery_type)}:")
         ExposedDropdownMenuBox(
             modifier = modifier,
             expanded = isExpanded,
