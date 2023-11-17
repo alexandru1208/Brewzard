@@ -13,7 +13,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.outlined.FavoriteBorder
-import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -44,7 +43,7 @@ import com.deskbird.breweries.details.ui.preview.BreweryDetailsScreenPreviewData
 import com.deskbird.designsystem.components.BrewzardButton
 import com.deskbird.designsystem.components.BrewzardError
 import com.deskbird.designsystem.theme.BrewzardThemeWithBackground
-import com.deskbird.designsystem.util.DevicePreview
+import com.deskbird.designsystem.util.DevicesPreview
 import com.deskbird.strings.R
 import com.deskbird.ui.util.ObserveAsEvents
 import com.deskbird.ui.util.call
@@ -57,7 +56,7 @@ import com.google.accompanist.permissions.rememberPermissionState
 @Composable
 fun BreweryDetailsScreen(
     onBackClick: () -> Unit,
-    onShowMessage: (String) -> Unit
+    onShowMessage: (String) -> Unit,
 ) {
     val viewModel = hiltViewModel<BreweryDetailsViewModel>()
     val state by viewModel.state.collectAsState()
@@ -133,7 +132,7 @@ private fun BreweryDetailsScreenContent(
             title = state.brewery?.name,
             isFavorite = state.brewery?.isFavorite,
             onBackClick = onBackClick,
-            onFavoriteClick = onFavoriteClick
+            onFavoriteClick = onFavoriteClick,
         )
 
         state.brewery?.let { brewery ->
@@ -149,7 +148,7 @@ private fun BreweryDetailsScreenContent(
         BrewzardError(
             modifier = Modifier.align(Alignment.Center),
             message = stringResource(id = R.string.details_error_message),
-            onTryAgainClick = onTryAgainClick
+            onTryAgainClick = onTryAgainClick,
         )
     }
 }
@@ -160,19 +159,19 @@ private fun DetailsTopBar(
     title: String?,
     isFavorite: Boolean?,
     onBackClick: () -> Unit = {},
-    onFavoriteClick: (Boolean) -> Unit
+    onFavoriteClick: (Boolean) -> Unit,
 ) = TopAppBar(
     colors = TopAppBarDefaults.topAppBarColors(
         containerColor = colorScheme.primaryContainer,
         navigationIconContentColor = colorScheme.onPrimaryContainer,
         titleContentColor = colorScheme.onPrimaryContainer,
-        actionIconContentColor = colorScheme.onPrimaryContainer
+        actionIconContentColor = colorScheme.onPrimaryContainer,
     ),
     navigationIcon = {
         IconButton(onClick = onBackClick) {
             Icon(
                 imageVector = Icons.Filled.ArrowBack,
-                contentDescription = stringResource(id = R.string.back_description)
+                contentDescription = stringResource(id = R.string.back_description),
             )
         }
     },
@@ -182,7 +181,7 @@ private fun DetailsTopBar(
                 text = it,
                 overflow = TextOverflow.Ellipsis,
                 style = typography.titleLarge,
-                maxLines = 1
+                maxLines = 1,
             )
         }
     },
@@ -199,7 +198,7 @@ private fun DetailsTopBar(
                 )
             }
         }
-    }
+    },
 )
 
 @Composable
@@ -212,11 +211,11 @@ private fun Details(
     modifier = Modifier
         .padding(16.dp)
         .verticalScroll(rememberScrollState()),
-    verticalArrangement = spacedBy(16.dp)
+    verticalArrangement = spacedBy(16.dp),
 ) {
     DetailsInfoSection(
         title = stringResource(id = R.string.brewery_type),
-        details = "${brewery.type.name} - ${brewery.type.description}"
+        details = "${brewery.type.name} - ${brewery.type.description}",
     )
     DetailsInfoSection(
         title = stringResource(id = R.string.address),
@@ -233,10 +232,10 @@ private fun Details(
             brewery.coordinates?.let {
                 onShowOnMapClick(
                     it.latitude,
-                    it.longitude
+                    it.longitude,
                 )
             }
-        }
+        },
     )
     brewery.phone?.let { phone ->
         DetailsInfoSection(
@@ -245,7 +244,7 @@ private fun Details(
             buttonText = stringResource(id = R.string.call),
             onClick = {
                 onCallClick(phone)
-            }
+            },
         )
     }
     brewery.websiteUrl?.let { websiteUrl ->
@@ -255,7 +254,7 @@ private fun Details(
             buttonText = stringResource(id = R.string.view_website),
             onClick = {
                 onOpenWebsiteClick(websiteUrl)
-            }
+            },
         )
     }
 }
@@ -266,13 +265,13 @@ private fun DetailsInfoSection(
     title: String,
     details: String,
     buttonText: String? = null,
-    onClick: () -> Unit = {}
+    onClick: () -> Unit = {},
 ) = Column(modifier = modifier) {
     Text(text = title, style = typography.titleLarge, color = colorScheme.onBackground)
     Divider(
         Modifier.padding(top = 4.dp, bottom = 4.dp),
         thickness = 1.dp,
-        color = colorScheme.onBackground
+        color = colorScheme.onBackground,
     )
     Text(text = details, style = typography.bodyLarge, color = colorScheme.onBackground)
     buttonText?.let {
@@ -281,14 +280,13 @@ private fun DetailsInfoSection(
                 .widthIn(min = 160.dp)
                 .padding(top = 8.dp),
             onClick = onClick,
-            text = buttonText
+            text = buttonText,
         )
     }
 }
 
-
 @Composable
-@DevicePreview
+@DevicesPreview
 private fun Preview(
     @PreviewParameter(BreweryDetailsScreenPreviewDataProvider::class) data: StableBreweryDetailsScreenState,
 ) = BrewzardThemeWithBackground { BreweryDetailsScreenContent(state = data) }

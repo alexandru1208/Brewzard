@@ -6,7 +6,6 @@ import com.deskbird.domain.data.LocalBreweriesDataSource
 import com.deskbird.domain.model.Brewery
 import com.deskbird.domain.util.DispatchersProvider
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
@@ -17,7 +16,7 @@ import javax.inject.Singleton
 internal class LocalBreweriesDataSourceImpl @Inject constructor(
     private val dispatchersProvider: DispatchersProvider,
     private val breweryDao: BreweryDao,
-    private val breweryMapper: BreweryMapper
+    private val breweryMapper: BreweryMapper,
 ) : LocalBreweriesDataSource {
 
     override suspend fun isFavorite(breweryId: String): Boolean {
@@ -25,28 +24,28 @@ internal class LocalBreweriesDataSourceImpl @Inject constructor(
     }
 
     override suspend fun getBrewery(
-        breweryId: String
+        breweryId: String,
     ): Brewery? = withContext(dispatchersProvider.io) {
         val breweryEntity = breweryDao.getBrewery(breweryId)
         return@withContext breweryEntity?.let(breweryMapper::mapToDomain)
     }
 
     override suspend fun updateFavorites(
-        vararg brewery: Brewery
+        vararg brewery: Brewery,
     ) = withContext(dispatchersProvider.io) {
         val breweries = breweryMapper.mapFromDomain(brewery.asList())
         breweryDao.update(*breweries.toTypedArray())
     }
 
     override suspend fun addToFavorites(
-        brewery: Brewery
+        brewery: Brewery,
     ) = withContext(dispatchersProvider.io) {
         val breweryEntity = breweryMapper.mapFromDomain(brewery)
         breweryDao.insert(breweryEntity)
     }
 
     override suspend fun removeFromFavorites(
-        brewery: Brewery
+        brewery: Brewery,
     ) = withContext(dispatchersProvider.io) {
         val breweriesEntity = breweryMapper.mapFromDomain(brewery)
         breweryDao.delete(breweriesEntity)

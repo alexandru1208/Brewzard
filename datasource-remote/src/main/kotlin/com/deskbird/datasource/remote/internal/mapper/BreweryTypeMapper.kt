@@ -20,7 +20,7 @@ internal class BreweryTypeMapper @Inject constructor() {
         "proprietor" -> BreweryType.PROPRIETOR
         "closed" -> BreweryType.CLOSED
         else -> throw DataSourceException(
-            RemoteError.MalformedDataError(IllegalArgumentException("Unknown brewery type received"))
+            RemoteError.MalformedDataError(IllegalArgumentException("Unknown brewery type received")),
         )
     }
 

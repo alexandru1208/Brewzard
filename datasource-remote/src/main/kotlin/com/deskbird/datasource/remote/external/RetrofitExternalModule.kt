@@ -13,6 +13,6 @@ abstract class RetrofitExternalModule {
 
     @Binds
     internal abstract fun bindRemoteBreweriesDatasource(
-        impl: RemoteBreweriesDataSourceImpl
+        impl: RemoteBreweriesDataSourceImpl,
     ): RemoteBreweriesDataSource
 }

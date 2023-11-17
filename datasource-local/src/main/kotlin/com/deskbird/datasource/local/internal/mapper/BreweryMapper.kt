@@ -7,7 +7,7 @@ import com.deskbird.domain.model.Coordinates
 import javax.inject.Inject
 
 internal class BreweryMapper @Inject constructor(
-    private val breweryTypeMapper: BreweryTypeMapper
+    private val breweryTypeMapper: BreweryTypeMapper,
 ) {
 
     fun mapFromDomain(breweries: List<Brewery>): List<BreweryEntity> =
@@ -47,13 +47,13 @@ internal class BreweryMapper @Inject constructor(
                 stateProvince = stateProvince,
                 state = state,
                 country = country,
-                postalCode = postalCode
+                postalCode = postalCode,
             ),
             coordinates = latitude?.let { lat ->
                 longitude?.let { long ->
                     Coordinates(
                         latitude = lat,
-                        longitude = long
+                        longitude = long,
                     )
                 }
             },

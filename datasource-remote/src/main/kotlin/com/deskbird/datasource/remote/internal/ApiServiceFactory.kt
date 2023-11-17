@@ -9,7 +9,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Inject
 
 internal class ApiServiceFactory @Inject constructor(
-    private val exceptionMapper: NetworkExceptionMapper
+    private val exceptionMapper: NetworkExceptionMapper,
 ) {
 
     fun create(): ApiService {

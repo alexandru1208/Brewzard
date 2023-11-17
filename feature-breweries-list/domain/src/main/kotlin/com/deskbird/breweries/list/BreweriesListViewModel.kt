@@ -41,16 +41,15 @@ class BreweriesListViewModel @Inject constructor(
                         it.copy(
                             breweries = it.breweries.map { brewery ->
                                 brewery.copy(isFavorite = favoriteBreweriesIds.contains(brewery.id))
-                            })
+                            },)
                     }
                 }
         }
     }
 
-
     private fun fetchBreweries(
         page: Int,
-        type: BreweryType? = null
+        type: BreweryType? = null,
     ) {
         if (type != state.value.selectedType) {
             pages.clear()
@@ -71,7 +70,7 @@ class BreweriesListViewModel @Inject constructor(
                 _state.update {
                     it.copy(
                         breweries = pages.flatMap { page -> page.value },
-                        progressIndicatorVisible = false
+                        progressIndicatorVisible = false,
                     )
                 }
             } catch (exception: DataSourceException) {
@@ -79,7 +78,7 @@ class BreweriesListViewModel @Inject constructor(
                     _state.update {
                         it.copy(
                             errorVisible = true,
-                            progressIndicatorVisible = false
+                            progressIndicatorVisible = false,
                         )
                     }
                 } else {
@@ -121,7 +120,7 @@ class BreweriesListViewModel @Inject constructor(
             if (!pages.containsKey(nextPage)) {
                 fetchBreweries(
                     page = (state.value.breweries.size / PAGE_SIZE) + 1,
-                    type = state.value.selectedType
+                    type = state.value.selectedType,
                 )
             }
         }
