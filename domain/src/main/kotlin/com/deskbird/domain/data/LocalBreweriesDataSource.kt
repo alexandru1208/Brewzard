@@ -1,6 +1,7 @@
 package com.deskbird.domain.data
 
 import com.deskbird.domain.model.Brewery
+import kotlinx.coroutines.flow.Flow
 
 interface LocalBreweriesDataSource {
     suspend fun isFavorite(breweryId: String): Boolean
@@ -8,5 +9,5 @@ interface LocalBreweriesDataSource {
     suspend fun updateFavorites(vararg brewery: Brewery)
     suspend fun addToFavorites(brewery: Brewery)
     suspend fun removeFromFavorites(brewery: Brewery)
-    suspend fun getFavorites(): List<Brewery>
+    fun observeFavorites(): Flow<List<Brewery>>
 }

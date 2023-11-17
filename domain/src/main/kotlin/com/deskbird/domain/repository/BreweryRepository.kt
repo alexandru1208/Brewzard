@@ -9,6 +9,9 @@ import com.deskbird.domain.model.BreweryType
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.supervisorScope
 import javax.inject.Inject
@@ -44,8 +47,8 @@ class BreweryRepository @Inject constructor(
         }
     }
 
-    suspend fun getFavorites(): List<Brewery> {
-        return localDatasource.getFavorites()
+    fun getFavorites(): Flow<List<Brewery>> {
+        return localDatasource.observeFavorites()
     }
 
     suspend fun addToFavorites(brewery: Brewery) {
