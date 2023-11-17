@@ -40,6 +40,7 @@ import com.deskbird.breweries.list.ui.model.StableBreweryType
 import com.deskbird.breweries.list.ui.model.toStable
 import com.deskbird.breweries.list.ui.preview.BreweriesScreenPreviewDataProvider
 import com.deskbird.designsystem.components.BreweryCard
+import com.deskbird.designsystem.components.BrewzardError
 import com.deskbird.designsystem.theme.BrewzardThemeWithBackground
 import com.deskbird.designsystem.util.DevicePreview
 import com.deskbird.domain.model.BreweryType
@@ -50,13 +51,18 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.filterNotNull
 
 @Composable
-fun BreweriesScreen(onNavigateToDetails: (String) -> Unit) {
+fun BreweriesScreen(
+    onNavigateToDetails: (String) -> Unit,
+    onShowMessage: (String) -> Unit
+) {
     val viewModel = hiltViewModel<BreweriesListViewModel>()
     val state by viewModel.state.collectAsState()
     val stableState = state.toStable()
+    val fetchMoreError = stringResource(id = R.string.fetch_more_breweries_error_message)
     ObserveAsEvents(flow = viewModel.events) {
         when (it) {
             is BreweriesListEvent.GoToDetails -> onNavigateToDetails(it.breweryId)
+            BreweriesListEvent.ShowFetchMoreError -> onShowMessage(fetchMoreError)
         }
     }
     BreweriesScreenContent(
@@ -64,7 +70,8 @@ fun BreweriesScreen(onNavigateToDetails: (String) -> Unit) {
         onBreweryClick = viewModel::onBreweryClick,
         onFavoriteClick = viewModel::onFavoriteClick,
         onTypeSelected = { viewModel.onTypeSelected(it?.index?.let(BreweryType.entries::get)) },
-        onItemVisible = viewModel::onItemVisible
+        onItemVisible = viewModel::onItemVisible,
+        onTryAgainClick = viewModel::onTryAgainClick
     )
 }
 
@@ -74,7 +81,8 @@ private fun BreweriesScreenContent(
     onBreweryClick: (String) -> Unit = {},
     onFavoriteClick: (String, Boolean) -> Unit = { _, _ -> },
     onTypeSelected: (StableBreweryType?) -> Unit = {},
-    onItemVisible: (Int) -> Unit = {}
+    onItemVisible: (Int) -> Unit = {},
+    onTryAgainClick: () -> Unit = {},
 ) {
     Box(
         modifier = Modifier
@@ -119,8 +127,17 @@ private fun BreweriesScreenContent(
                     .collect(onItemVisible)
             }
         }
+
         if (state.progressIndicatorVisible) {
             CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+        }
+
+        if (state.errorVisible) {
+            BrewzardError(
+                modifier = Modifier.align(Alignment.Center),
+                message = stringResource(id = R.string.fetch_breweries_error_message),
+                onTryAgainClick = onTryAgainClick
+            )
         }
     }
 }

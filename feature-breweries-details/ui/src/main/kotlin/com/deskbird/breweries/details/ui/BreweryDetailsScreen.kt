@@ -41,6 +41,8 @@ import com.deskbird.breweries.details.ui.model.StableBrewery
 import com.deskbird.breweries.details.ui.model.StableBreweryDetailsScreenState
 import com.deskbird.breweries.details.ui.model.toStable
 import com.deskbird.breweries.details.ui.preview.BreweryDetailsScreenPreviewDataProvider
+import com.deskbird.designsystem.components.BrewzardButton
+import com.deskbird.designsystem.components.BrewzardError
 import com.deskbird.designsystem.theme.BrewzardThemeWithBackground
 import com.deskbird.designsystem.util.DevicePreview
 import com.deskbird.strings.R
@@ -111,7 +113,8 @@ fun BreweryDetailsScreen(
         onShowOnMapClick = viewModel::onShowOnMapClick,
         onOpenWebsiteClick = viewModel::onGotToWebsiteClick,
         onFavoriteClick = viewModel::onFavoriteButtonClick,
-        onBackClick = onBackClick
+        onTryAgainClick = viewModel::onTryAgainClick,
+        onBackClick = onBackClick,
     )
 }
 
@@ -122,7 +125,8 @@ private fun BreweryDetailsScreenContent(
     onShowOnMapClick: (Float, Float) -> Unit = { _, _ -> },
     onOpenWebsiteClick: (String) -> Unit = {},
     onBackClick: () -> Unit = {},
-    onFavoriteClick: (Boolean) -> Unit = {}
+    onFavoriteClick: (Boolean) -> Unit = {},
+    onTryAgainClick: () -> Unit = {},
 ) = Box(modifier = Modifier.fillMaxSize()) {
     Column {
         DetailsTopBar(
@@ -139,6 +143,14 @@ private fun BreweryDetailsScreenContent(
 
     if (state.progressIndicatorVisible) {
         CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+    }
+
+    if (state.errorVisible) {
+        BrewzardError(
+            modifier = Modifier.align(Alignment.Center),
+            message = stringResource(id = R.string.details_error_message),
+            onTryAgainClick = onTryAgainClick
+        )
     }
 }
 
@@ -264,14 +276,13 @@ private fun DetailsInfoSection(
     )
     Text(text = details, style = typography.bodyLarge, color = colorScheme.onBackground)
     buttonText?.let {
-        Button(
+        BrewzardButton(
             modifier = Modifier
                 .widthIn(min = 160.dp)
                 .padding(top = 8.dp),
-            onClick = onClick
-        ) {
-            Text(text = buttonText, style = typography.labelLarge)
-        }
+            onClick = onClick,
+            text = buttonText
+        )
     }
 }
 
