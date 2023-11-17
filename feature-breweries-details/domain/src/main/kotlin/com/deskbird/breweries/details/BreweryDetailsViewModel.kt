@@ -28,16 +28,23 @@ class BreweryDetailsViewModel @Inject constructor(
     val state = _state.asStateFlow()
 
     init {
+        fetchDetails()
+    }
+
+    private fun fetchDetails() {
         viewModelScope.launch {
             _state.update {
-                it.copy(progressIndicatorVisible = true)
+                it.copy(
+                    progressIndicatorVisible = true,
+                    errorVisible = false
+                )
             }
             try {
                 val brewery = breweryRepository.getBrewery(breweryId)
                 _state.update {
                     it.copy(
                         brewery = brewery,
-                        progressIndicatorVisible = false
+                        progressIndicatorVisible = false,
                     )
                 }
             } catch (exception: DataSourceException) {
@@ -82,5 +89,9 @@ class BreweryDetailsViewModel @Inject constructor(
                 it.copy(brewery = it.brewery?.copy(isFavorite = !isFavorite))
             }
         }
+    }
+
+    fun onTryAgainClick() {
+        fetchDetails()
     }
 }
