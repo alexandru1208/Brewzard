@@ -78,6 +78,9 @@ class BreweryDetailsViewModel @Inject constructor(
                     breweryRepository.addToFavorites(it)
                 }
             }
+            _state.update {
+                it.copy(brewery = it.brewery?.copy(isFavorite = !isFavorite))
+            }
         }
     }
 }

@@ -7,11 +7,12 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import com.deskbird.datasource.local.internal.model.BreweryEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 internal interface BreweryDao {
     @Query("SELECT * FROM breweries")
-    suspend fun getAll(): List<BreweryEntity>
+    fun observeAll(): Flow<List<BreweryEntity>>
 
     @Query("SELECT * FROM breweries WHERE id==:breweryId")
     suspend fun getBrewery(breweryId: String): BreweryEntity?

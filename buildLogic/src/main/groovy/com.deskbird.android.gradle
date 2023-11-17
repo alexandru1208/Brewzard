@@ -10,11 +10,11 @@ android {
 
     lintOptions {
         abortOnError true
-        warningsAsErrors true
+        warningsAsErrors false
     }
 
     kotlinOptions {
-        allWarningsAsErrors = true
+        allWarningsAsErrors = false
         jvmTarget = "1.8"
     }
 

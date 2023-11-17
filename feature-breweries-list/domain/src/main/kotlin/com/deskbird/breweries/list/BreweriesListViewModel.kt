@@ -10,6 +10,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -30,6 +32,19 @@ class BreweriesListViewModel @Inject constructor(
 
     init {
         fetchBreweries(page = FIRST_PAGE_NUMBER)
+        viewModelScope.launch {
+            breweryRepository.getFavorites()
+                .map { breweries -> breweries.map { it.id }.toSet() }
+                .distinctUntilChanged()
+                .collect { favoriteBreweriesIds ->
+                    _state.update {
+                        it.copy(
+                            breweries = it.breweries.map { brewery ->
+                                brewery.copy(isFavorite = favoriteBreweriesIds.contains(brewery.id))
+                            })
+                    }
+                }
+        }
     }
 
     private fun fetchBreweries(page: Int, type: BreweryType? = null) {
@@ -39,7 +54,7 @@ class BreweriesListViewModel @Inject constructor(
         viewModelScope.launch {
             _state.update {
                 it.copy(
-                    breweries = pages.flatMap { it.value },
+                    breweries = pages.flatMap { page -> page.value },
                     progressIndicatorVisible = true
                 )
             }
@@ -50,7 +65,7 @@ class BreweriesListViewModel @Inject constructor(
                 _state.update {
                     it.copy(
                         selectedType = type,
-                        breweries = pages.flatMap { it.value },
+                        breweries = pages.flatMap { page -> page.value },
                         progressIndicatorVisible = false
                     )
                 }
@@ -85,15 +100,6 @@ class BreweriesListViewModel @Inject constructor(
                     breweryRepository.removeFromFavorites(brewery)
                 } else {
                     breweryRepository.addToFavorites(brewery)
-                }
-                _state.update { oldState ->
-                    oldState.copy(breweries = oldState.breweries.map {
-                        if (it.id == breweryId) {
-                            it.copy(isFavorite = !isFavorite)
-                        } else {
-                            it
-                        }
-                    })
                 }
             }
         }
