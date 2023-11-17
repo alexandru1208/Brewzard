@@ -50,7 +50,9 @@ import com.deskbird.ui.util.call
 import com.deskbird.ui.util.openMap
 import com.deskbird.ui.util.openWebsite
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.isGranted
 import com.google.accompanist.permissions.rememberPermissionState
+import com.google.accompanist.permissions.shouldShowRationale
 
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
@@ -73,17 +75,13 @@ fun BreweryDetailsScreen(
         when (it) {
             is BreweryDetailsEvent.Call -> {
                 when {
-                    callPermissionState.hasPermission -> {
+                    callPermissionState.status.isGranted -> {
                         if (!context.call(it.phoneNumber)) {
                             onShowMessage(cannotCallMessage)
                         }
                     }
 
-                    callPermissionState.shouldShowRationale -> {
-                        callPermissionState.launchPermissionRequest()
-                    }
-
-                    callPermissionState.permissionRequested -> {
+                    callPermissionState.status.shouldShowRationale -> {
                         onShowMessage(callPermissionMissingMessage)
                     }
 
