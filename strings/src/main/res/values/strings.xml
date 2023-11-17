@@ -40,4 +40,5 @@
     <string name="details_error_message">We were not able to fetch the details for your brewery. Please check your internet connection and try again!</string>
     <string name="fetch_more_breweries_error_message">We were not able to fetch more breweries. Please check your internet connection!</string>
     <string name="fetch_breweries_error_message">We were not able to fetch the breweries. Please check your internet connection!\n\nIn the meantime you can always check your favorite breweries offline.</string>
+    <string name="no_favorites_message">You have no favorite brewery.\nLook for something you might like in the Breweries screen</string>
 </resources>

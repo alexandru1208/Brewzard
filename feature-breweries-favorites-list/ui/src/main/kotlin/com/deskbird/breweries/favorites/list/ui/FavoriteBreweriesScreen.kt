@@ -9,11 +9,15 @@ import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -26,6 +30,7 @@ import com.deskbird.designsystem.components.BreweryCard
 import com.deskbird.designsystem.theme.BrewzardThemeWithBackground
 import com.deskbird.designsystem.util.DevicesPreview
 import com.deskbird.ui.util.ObserveAsEvents
+import com.deskbird.strings.R
 
 @Composable
 fun FavoriteBreweriesScreen(onNavigateToDetails: (String) -> Unit) {
@@ -76,6 +81,15 @@ private fun BreweriesScreenContent(
         }
         if (state.progressIndicatorVisible) {
             CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+        }
+        if (state.breweries.isEmpty()) {
+            Text(
+                modifier = Modifier.align(Alignment.Center),
+                textAlign = TextAlign.Center,
+                text = stringResource(id = R.string.no_favorites_message),
+                style = MaterialTheme.typography.bodyLarge,
+                color = MaterialTheme.colorScheme.onBackground,
+            )
         }
     }
 }
