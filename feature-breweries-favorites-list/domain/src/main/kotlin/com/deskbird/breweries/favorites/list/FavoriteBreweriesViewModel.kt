@@ -34,13 +34,15 @@ class FavoriteBreweriesViewModel @Inject constructor(
                     progressIndicatorVisible = true
                 )
             }
-            val breweries = breweryRepository.getFavorites()
-            _state.update {
-                it.copy(
-                    breweries = breweries,
-                    progressIndicatorVisible = false
-                )
+            breweryRepository.getFavorites().collect { breweries ->
+                _state.update {
+                    it.copy(
+                        breweries = breweries,
+                        progressIndicatorVisible = false
+                    )
+                }
             }
+
         }
     }
 
@@ -54,11 +56,7 @@ class FavoriteBreweriesViewModel @Inject constructor(
         viewModelScope.launch {
             state.value.breweries.find { it.id == breweryId }?.let { brewery ->
                 breweryRepository.removeFromFavorites(brewery)
-                _state.update { oldState ->
-                    oldState.copy(breweries = oldState.breweries.filter { it.id != breweryId })
-                }
             }
         }
     }
-
 }

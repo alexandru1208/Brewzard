@@ -28,7 +28,7 @@ internal data class StableBrewery(
     val name: String,
     val websiteUrl: String?,
     val phone: String?,
-    val breweryType: String,
+    val type: StableBreweryType,
     val address: StableAddress,
     val coordinates: StableCoordinates?,
     val isFavorite: Boolean,
@@ -40,7 +40,7 @@ private fun Brewery.toStable() = StableBrewery(
     name = name,
     websiteUrl = websiteUrl,
     phone = phone,
-    breweryType = type.toStable(),
+    type = type.toStable(),
     address = address.toStable(),
     coordinates = coordinates?.toStable(),
     isFavorite = isFavorite
@@ -74,19 +74,39 @@ private fun Coordinates.toStable() = StableCoordinates(
     longitude = longitude
 )
 
+internal data class StableBreweryType(
+    val name: String,
+    val description: String
+)
+
 @Composable
 @ReadOnlyComposable
-private fun BreweryType.toStable() = stringResource(
-    id = when (this) {
-        BreweryType.MICRO -> R.string.micro_type
-        BreweryType.NANO -> R.string.nano_type
-        BreweryType.REGIONAL -> R.string.regional_type
-        BreweryType.BREWPUB -> R.string.brewpub_type
-        BreweryType.LARGE -> R.string.large_type
-        BreweryType.PLANNING -> R.string.planning_type
-        BreweryType.BAR -> R.string.bar_type
-        BreweryType.CONTRACT -> R.string.contract_type
-        BreweryType.PROPRIETOR -> R.string.proprietor_type
-        BreweryType.CLOSED -> R.string.closed_type
-    }
+private fun BreweryType.toStable() = StableBreweryType(
+    name = stringResource(
+        id = when (this) {
+            BreweryType.MICRO -> R.string.micro_type
+            BreweryType.NANO -> R.string.nano_type
+            BreweryType.REGIONAL -> R.string.regional_type
+            BreweryType.BREWPUB -> R.string.brewpub_type
+            BreweryType.LARGE -> R.string.large_type
+            BreweryType.PLANNING -> R.string.planning_type
+            BreweryType.BAR -> R.string.bar_type
+            BreweryType.CONTRACT -> R.string.contract_type
+            BreweryType.PROPRIETOR -> R.string.proprietor_type
+            BreweryType.CLOSED -> R.string.closed_type
+        }
+    ), description = stringResource(
+        id = when (this) {
+            BreweryType.MICRO -> R.string.micro_type_description
+            BreweryType.NANO -> R.string.nano_type_description
+            BreweryType.REGIONAL -> R.string.regional_type_description
+            BreweryType.BREWPUB -> R.string.brewpub_type_description
+            BreweryType.LARGE -> R.string.large_type_description
+            BreweryType.PLANNING -> R.string.planning_type_description
+            BreweryType.BAR -> R.string.bar_type_description
+            BreweryType.CONTRACT -> R.string.contract_type_description
+            BreweryType.PROPRIETOR -> R.string.proprietor_type_description
+            BreweryType.CLOSED -> R.string.closed_type_description
+        }
+    )
 )
