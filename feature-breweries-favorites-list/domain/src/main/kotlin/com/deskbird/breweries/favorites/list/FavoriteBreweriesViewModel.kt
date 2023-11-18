@@ -34,7 +34,7 @@ class FavoriteBreweriesViewModel @Inject constructor(
                     progressIndicatorVisible = true,
                 )
             }
-            breweryRepository.getFavorites().collect { breweries ->
+            breweryRepository.observeFavorites().collect { breweries ->
                 _state.update {
                     it.copy(
                         breweries = breweries,

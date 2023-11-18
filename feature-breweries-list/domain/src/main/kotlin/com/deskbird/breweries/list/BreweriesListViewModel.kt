@@ -33,7 +33,7 @@ class BreweriesListViewModel @Inject constructor(
     init {
         fetchBreweries(page = FIRST_PAGE_NUMBER)
         viewModelScope.launch {
-            breweryRepository.getFavorites()
+            breweryRepository.observeFavorites()
                 .map { breweries -> breweries.map { it.id }.toSet() }
                 .distinctUntilChanged()
                 .collect { favoriteBreweriesIds ->
@@ -41,7 +41,8 @@ class BreweriesListViewModel @Inject constructor(
                         it.copy(
                             breweries = it.breweries.map { brewery ->
                                 brewery.copy(isFavorite = favoriteBreweriesIds.contains(brewery.id))
-                            },)
+                            },
+                        )
                     }
                 }
         }
