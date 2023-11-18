@@ -6,3 +6,7 @@ plugins {
 android {
     namespace = "com.deskbird.domain"
 }
+
+dependencies {
+    testImplementation(project(":test-util"))
+}

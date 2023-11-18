@@ -6,4 +6,5 @@ plugins {
 dependencies {
     implementation libs.androidx.lifecycle.viewmodel.ktx
     implementation project(":domain")
+    testImplementation project(":test-util")
 }

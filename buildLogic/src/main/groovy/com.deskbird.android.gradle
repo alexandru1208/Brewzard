@@ -16,14 +16,13 @@ android {
 
     kotlinOptions {
         allWarningsAsErrors = false
-        jvmTarget = "1.8"
+        jvmTarget = JavaVersion.VERSION_17.toString()
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
-
 
     compileSdkVersion project.properties.compileSdk
 
@@ -35,4 +34,5 @@ android {
 
 dependencies {
     implementation libs.bundles.kotlin.coroutines
+    testImplementation libs.bundles.testing
 }

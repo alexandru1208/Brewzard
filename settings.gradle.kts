@@ -20,7 +20,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Brewzard"
+rootProject.name = "brewzard"
 include(":app")
 include(":strings")
 include(":domain")
@@ -28,6 +28,7 @@ include(":datasource-remote")
 include(":datasource-local")
 include(":ui-design-system")
 include(":ui-util")
+include(":test-util")
 include(":feature-breweries-list:domain")
 include(":feature-breweries-list:ui")
 include(":feature-breweries-favorites-list:domain")

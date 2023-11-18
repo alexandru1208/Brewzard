@@ -31,10 +31,10 @@ internal class LocalBreweriesDataSourceImpl @Inject constructor(
     }
 
     override suspend fun updateFavorites(
-        vararg brewery: Brewery,
+        breweries: List<Brewery>,
     ) = withContext(dispatchersProvider.io) {
-        val breweries = breweryMapper.mapFromDomain(brewery.asList())
-        breweryDao.update(*breweries.toTypedArray())
+        val breweryEntities = breweryMapper.mapFromDomain(breweries)
+        breweryDao.update(*breweryEntities.toTypedArray())
     }
 
     override suspend fun addToFavorites(
