@@ -8,6 +8,6 @@ android {
 }
 
 dependencies {
-    implementation(project(":strings"))
+    implementation(project(":ui:strings"))
 }
 

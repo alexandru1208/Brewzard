@@ -9,6 +9,6 @@ android {
 
 dependencies {
     implementation(project(":domain:api"))
-    testImplementation(project(":test-util"))
-    testImplementation(project(":test-data"))
+    testImplementation(project(":test:util"))
+    testImplementation(project(":test:data"))
 }

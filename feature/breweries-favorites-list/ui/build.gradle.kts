@@ -7,5 +7,5 @@ android {
 }
 
 dependencies {
-    implementation(project(":feature-breweries-favorites-list:domain"))
+    implementation(project(":feature:breweries-favorites-list:domain"))
 }

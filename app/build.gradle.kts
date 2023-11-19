@@ -23,13 +23,13 @@ android {
 }
 
 dependencies {
-    implementation(project(":ui-design-system"))
-    implementation(project(":strings"))
+    implementation(project(":ui:design-system"))
+    implementation(project(":ui:strings"))
     implementation(project(":domain:api"))
     implementation(project(":domain:impl"))
     implementation(project(":datasource:remote"))
     implementation(project(":datasource:local"))
-    implementation(project(":feature-breweries-list:ui"))
-    implementation(project(":feature-breweries-favorites-list:ui"))
-    implementation(project(":feature-breweries-details:ui"))
+    implementation(project(":feature:breweries-list:ui"))
+    implementation(project(":feature:breweries-favorites-list:ui"))
+    implementation(project(":feature:breweries-details:ui"))
 }
