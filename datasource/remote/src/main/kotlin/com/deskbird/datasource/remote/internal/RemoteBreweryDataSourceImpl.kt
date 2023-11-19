@@ -2,7 +2,7 @@ package com.deskbird.datasource.remote.internal
 
 import com.deskbird.datasource.remote.internal.mapper.BreweryMapper
 import com.deskbird.datasource.remote.internal.mapper.BreweryTypeMapper
-import com.deskbird.domain.data.RemoteBreweriesDataSource
+import com.deskbird.domain.data.RemoteBreweryDataSource
 import com.deskbird.domain.model.Brewery
 import com.deskbird.domain.model.BreweryType
 import com.deskbird.domain.util.DispatchersProvider
@@ -11,12 +11,12 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-internal class RemoteBreweriesDataSourceImpl @Inject constructor(
+internal class RemoteBreweryDataSourceImpl @Inject constructor(
     private val dispatchersProvider: DispatchersProvider,
     private val apiService: ApiService,
     private val breweryTypeMapper: BreweryTypeMapper,
     private val breweryMapper: BreweryMapper,
-) : RemoteBreweriesDataSource {
+) : RemoteBreweryDataSource {
     override suspend fun getBrewery(
         id: String,
     ): Brewery = withContext(dispatchersProvider.io) {
