@@ -5,7 +5,11 @@ plugins {
 }
 
 android {
+    compileSdkVersion project.properties.compileSdk
+
     defaultConfig {
+        minSdkVersion project.properties.minSdk
+        targetSdkVersion project.properties.targetSdk
         vectorDrawables.useSupportLibrary = true
     }
 
@@ -16,23 +20,20 @@ android {
 
     kotlinOptions {
         allWarningsAsErrors = false
-        jvmTarget = "1.8"
+        jvmTarget = JavaVersion.VERSION_17.toString()
+    }
+
+    testOptions {
+        unitTests.returnDefaultValues = true
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-
-
-    compileSdkVersion project.properties.compileSdk
-
-    defaultConfig {
-        minSdkVersion project.properties.minSdk
-        targetSdkVersion project.properties.targetSdk
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
 }
 
 dependencies {
     implementation libs.bundles.kotlin.coroutines
+    testImplementation libs.bundles.testing
 }

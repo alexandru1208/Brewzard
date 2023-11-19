@@ -6,8 +6,8 @@ plugins {
 
 dependencies {
     implementation libs.kotlin.collections.immutable
-    implementation project(":domain")
-    implementation project(":ui-design-system")
-    implementation project(":ui-util")
-    implementation project(":strings")
+    implementation project(":domain:api")
+    implementation project(":ui:design-system")
+    implementation project(":ui:util")
+    implementation project(":ui:strings")
 }
