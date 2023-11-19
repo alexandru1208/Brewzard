@@ -7,5 +7,5 @@ android {
 }
 
 dependencies {
-    implementation(project(":feature-breweries-details:domain"))
+    implementation(project(":feature:breweries-details:domain"))
 }
