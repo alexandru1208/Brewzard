@@ -20,7 +20,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "brewzard"
+rootProject.name = "Brewzard"
 include(":app")
 include(":domain:api")
 include(":domain:impl")
