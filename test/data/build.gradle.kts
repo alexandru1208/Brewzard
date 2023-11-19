@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace = "com.deskbird.test.data"
+    namespace = "com.deskbird.brewzard.test.data"
 }
 
 dependencies{

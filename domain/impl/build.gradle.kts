@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.deskbird.domain.impl"
+    namespace = "com.deskbird.brewzard.domain.impl"
 }
 
 dependencies {

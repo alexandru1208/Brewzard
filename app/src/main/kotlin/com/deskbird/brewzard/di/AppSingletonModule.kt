@@ -1,6 +1,6 @@
 package com.deskbird.brewzard.di
 
-import com.deskbird.domain.util.DispatchersProvider
+import com.deskbird.brewzard.domain.util.DispatchersProvider
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

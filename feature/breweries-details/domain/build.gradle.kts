@@ -3,5 +3,5 @@ plugins {
 }
 
 android {
-    namespace = "com.deskbird.breweries.details"
+    namespace = "com.deskbird.brewzard.breweries.details"
 }

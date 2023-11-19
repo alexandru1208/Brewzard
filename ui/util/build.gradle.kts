@@ -4,5 +4,5 @@ plugins {
 }
 
 android {
-    namespace = "com.deskbird.ui.util"
+    namespace = "com.deskbird.brewzard.ui.util"
 }

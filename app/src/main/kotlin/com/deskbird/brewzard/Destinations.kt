@@ -5,7 +5,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.List
 import androidx.compose.ui.graphics.vector.ImageVector
-import com.deskbird.strings.R
+import com.deskbird.brewzard.ui.strings.R
 
 sealed interface Destination {
     val route: String

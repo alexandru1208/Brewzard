@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.core.view.WindowCompat
-import com.deskbird.designsystem.theme.BrewzardThemeWithBackground
+import com.deskbird.brewzard.ui.designsystem.theme.BrewzardThemeWithBackground
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

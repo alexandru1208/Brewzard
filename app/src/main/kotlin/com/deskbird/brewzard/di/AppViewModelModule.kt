@@ -2,7 +2,7 @@ package com.deskbird.brewzard.di
 
 import androidx.lifecycle.SavedStateHandle
 import com.deskbird.brewzard.Screen
-import com.deskbird.domain.di.BreweryId
+import com.deskbird.brewzard.domain.di.BreweryId
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

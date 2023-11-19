@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace = "com.deskbird.breweries.list.ui"
+    namespace = "com.deskbird.brewzard.breweries.list.ui"
 }
 
 dependencies{

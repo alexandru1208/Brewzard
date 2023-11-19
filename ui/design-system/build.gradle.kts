@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.deskbird.ui.designsystem"
+    namespace = "com.deskbird.brewzard.ui.designsystem"
 }
 
 dependencies {

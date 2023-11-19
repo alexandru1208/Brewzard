@@ -4,5 +4,5 @@ plugins {
 }
 
 android {
-    namespace = "com.deskbird.domain.api"
+    namespace = "com.deskbird.brewzard.domain.api"
 }

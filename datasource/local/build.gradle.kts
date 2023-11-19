@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.deskbird.datasource.local"
+    namespace = "com.deskbird.brewzard.datasource.local"
 }
 
 dependencies {

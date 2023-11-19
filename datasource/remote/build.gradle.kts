@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.deskbird.datasource.remote"
+    namespace = "com.deskbird.brewzard.datasource.remote"
 }
 
 dependencies {

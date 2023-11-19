@@ -35,11 +35,11 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
-import com.deskbird.breweries.details.ui.BreweryDetailsScreen
-import com.deskbird.breweries.favorites.list.ui.FavoriteBreweriesScreen
-import com.deskbird.breweries.list.ui.BreweriesScreen
-import com.deskbird.designsystem.theme.BrewzardThemeWithBackground
-import com.deskbird.designsystem.util.DevicesPreview
+import com.deskbird.brewzard.breweries.details.ui.BreweryDetailsScreen
+import com.deskbird.brewzard.breweries.favorites.ui.FavoriteBreweriesScreen
+import com.deskbird.brewzard.breweries.list.ui.BreweriesScreen
+import com.deskbird.brewzard.ui.designsystem.theme.BrewzardThemeWithBackground
+import com.deskbird.brewzard.ui.designsystem.util.DevicesPreview
 import kotlinx.coroutines.launch
 
 val bottomNavItems = listOf(
