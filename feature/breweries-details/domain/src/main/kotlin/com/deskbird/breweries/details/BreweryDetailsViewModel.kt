@@ -31,13 +31,13 @@ class BreweryDetailsViewModel @Inject constructor(
     }
 
     private fun fetchDetails() {
+        _state.update {
+            it.copy(
+                progressIndicatorVisible = true,
+                errorVisible = false,
+            )
+        }
         viewModelScope.launch {
-            _state.update {
-                it.copy(
-                    progressIndicatorVisible = true,
-                    errorVisible = false,
-                )
-            }
             try {
                 val brewery = breweryRepository.getBrewery(breweryId)
                 _state.update {

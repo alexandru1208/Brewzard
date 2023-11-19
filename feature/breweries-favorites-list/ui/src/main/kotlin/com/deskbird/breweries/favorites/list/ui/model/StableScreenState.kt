@@ -13,7 +13,6 @@ import kotlinx.collections.immutable.toImmutableList
 internal data class StableFavoriteBreweriesScreenState(
     val breweries: ImmutableList<StableBreweryItem>,
     val progressIndicatorVisible: Boolean,
-    val errorVisible: Boolean,
 )
 
 @Composable
@@ -21,7 +20,6 @@ internal data class StableFavoriteBreweriesScreenState(
 internal fun FavoriteBreweriesScreenState.toStable() = StableFavoriteBreweriesScreenState(
     breweries = breweries.map { it.toStable() }.toImmutableList(),
     progressIndicatorVisible = progressIndicatorVisible,
-    errorVisible = errorVisible,
 )
 
 @Composable
@@ -42,11 +40,6 @@ internal data class StableBreweryItem(
     val country: String,
     val breweryType: String,
     val isFavorite: Boolean,
-)
-
-data class StableBreweryType(
-    val index: Int,
-    val name: String,
 )
 
 @Composable
