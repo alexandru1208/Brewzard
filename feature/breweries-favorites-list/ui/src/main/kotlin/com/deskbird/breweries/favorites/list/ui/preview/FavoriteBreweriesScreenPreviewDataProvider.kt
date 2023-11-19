@@ -20,7 +20,6 @@ private fun createPreviewBreweries(count: Int) = (1..count).map {
 
 private fun createUiState(
     progressVisible: Boolean = false,
-    errorVisible: Boolean = false,
     nrOfBreweries: Int = 10,
 ) = StableFavoriteBreweriesScreenState(
     breweries = createPreviewBreweries(nrOfBreweries),

@@ -15,11 +15,11 @@ android {
 
     lintOptions {
         abortOnError true
-        warningsAsErrors false
+        warningsAsErrors true
     }
 
     kotlinOptions {
-        allWarningsAsErrors = false
+        allWarningsAsErrors = true
         jvmTarget = JavaVersion.VERSION_17.toString()
     }
 

@@ -13,8 +13,8 @@ import org.junit.jupiter.api.Test
 internal class BreweryMapperTest {
 
     private val breweryTypeMapper = mockk<BreweryTypeMapper> {
-        every { mapToDomain(any()) } returns BreweryType.BREWPUB
-        every { mapFromDomain(any()) } returns "brewpub"
+        every { mapToDomain("brewpub") } returns BreweryType.BREWPUB
+        every { mapFromDomain(BreweryType.BREWPUB) } returns "brewpub"
     }
     private val tested = BreweryMapper(breweryTypeMapper)
 
@@ -41,7 +41,7 @@ internal class BreweryMapperTest {
         tested.mapFromDomain(domainBrewery) `should be equal to` BreweryEntity(
             id = "Id",
             name = "Name",
-            type = "large",
+            type = "brewpub",
             city = "City",
             stateProvince = "StateProvince",
             postalCode = "PostalCode",
@@ -60,7 +60,7 @@ internal class BreweryMapperTest {
         val breweryEntity = BreweryEntity(
             id = "Id",
             name = "Name",
-            type = "large",
+            type = "brewpub",
             city = "City",
             stateProvince = "StateProvince",
             postalCode = "PostalCode",
