@@ -28,10 +28,12 @@ internal class NetworkExceptionMapperTest {
     }
 
     companion object {
-        private val httpException = HttpException(mockk<Response<Any>> {
-            every { code() } returns HTTP_CODE
-            every { message() } returns HTTP_MESSAGE
-        },)
+        private val httpException = HttpException(
+            mockk<Response<Any>> {
+                every { code() } returns HTTP_CODE
+                every { message() } returns HTTP_MESSAGE
+            },
+        )
 
         private val ioException = IOException()
         private val numberFormatException = NumberFormatException()

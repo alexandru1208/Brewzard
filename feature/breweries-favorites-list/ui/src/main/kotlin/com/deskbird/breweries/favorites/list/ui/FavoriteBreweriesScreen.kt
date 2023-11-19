@@ -29,8 +29,8 @@ import com.deskbird.breweries.favorites.list.ui.preview.FavoriteBreweriesScreenP
 import com.deskbird.designsystem.components.BreweryCard
 import com.deskbird.designsystem.theme.BrewzardThemeWithBackground
 import com.deskbird.designsystem.util.DevicesPreview
-import com.deskbird.ui.util.ObserveAsEvents
 import com.deskbird.strings.R
+import com.deskbird.ui.util.ObserveAsEvents
 
 @Composable
 fun FavoriteBreweriesScreen(onNavigateToDetails: (String) -> Unit) {
@@ -61,7 +61,6 @@ private fun BreweriesScreenContent(
             .windowInsetsPadding(WindowInsets.statusBars)
             .padding(16.dp),
     ) {
-
         LazyColumn(
             verticalArrangement = spacedBy(16.dp),
         ) {

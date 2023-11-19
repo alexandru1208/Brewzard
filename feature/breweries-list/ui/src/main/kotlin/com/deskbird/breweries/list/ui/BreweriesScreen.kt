@@ -33,8 +33,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.deskbird.breweries.list.BreweriesListViewModel
 import com.deskbird.breweries.list.BreweriesListEvent
+import com.deskbird.breweries.list.BreweriesListViewModel
 import com.deskbird.breweries.list.ui.model.StableBreweriesScreenState
 import com.deskbird.breweries.list.ui.model.StableBreweryType
 import com.deskbird.breweries.list.ui.model.toStable
@@ -109,13 +109,15 @@ private fun BreweriesScreenContent(
             ) {
                 state.breweries.forEach { brewery ->
                     item(key = brewery.id) {
-                        BreweryCard(name = brewery.name,
+                        BreweryCard(
+                            name = brewery.name,
                             city = brewery.city,
                             country = brewery.country,
                             breweryType = brewery.breweryType,
                             isFavorite = brewery.isFavorite,
                             onFavoriteClick = { onFavoriteClick(brewery.id, brewery.isFavorite) },
-                            onClick = { onBreweryClick(brewery.id) },)
+                            onClick = { onBreweryClick(brewery.id) },
+                        )
                     }
                 }
             }

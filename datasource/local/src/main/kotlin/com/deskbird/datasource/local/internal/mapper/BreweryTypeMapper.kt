@@ -16,7 +16,7 @@ internal class BreweryTypeMapper @Inject constructor() {
         "contract" -> BreweryType.CONTRACT
         "proprietor" -> BreweryType.PROPRIETOR
         "closed" -> BreweryType.CLOSED
-        else -> throw IllegalArgumentException()
+        else -> throw IllegalArgumentException("Unknown brewery type received")
     }
 
     fun mapFromDomain(type: BreweryType): String = when (type) {

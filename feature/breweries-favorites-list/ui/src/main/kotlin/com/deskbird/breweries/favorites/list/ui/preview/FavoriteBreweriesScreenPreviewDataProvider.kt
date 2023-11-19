@@ -1,8 +1,8 @@
 package com.deskbird.breweries.favorites.list.ui.preview
 
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
-import com.deskbird.breweries.favorites.list.ui.model.StableFavoriteBreweriesScreenState
 import com.deskbird.breweries.favorites.list.ui.model.StableBreweryItem
+import com.deskbird.breweries.favorites.list.ui.model.StableFavoriteBreweriesScreenState
 import kotlinx.collections.immutable.toImmutableList
 import kotlin.random.Random.Default.nextBoolean
 

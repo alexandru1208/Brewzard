@@ -67,48 +67,7 @@ fun AppNavigation() {
             SnackbarHost(hostState = snackbarHostState)
         },
         bottomBar = {
-            BottomNavigation(
-                modifier = Modifier
-                    .background(colorScheme.primaryContainer)
-                    .windowInsetsPadding(WindowInsets.navigationBars),
-                backgroundColor = colorScheme.primaryContainer,
-                elevation = 0.dp,
-            ) {
-                val navBackStackEntry by navController.currentBackStackEntryAsState()
-                val currentDestination = navBackStackEntry?.destination
-                bottomNavItems.forEach { screen ->
-                    val selected = currentDestination?.hierarchy?.any {
-                        it.route == screen.route
-                    } == true
-                    val contentColor = if (selected) {
-                        colorScheme.onPrimaryContainer
-                    } else {
-                        Color.Gray
-                    }
-                    BottomNavigationItem(
-                        selected = selected,
-                        icon = {
-                            Icon(
-                                screen.icon,
-                                contentDescription = null,
-                                tint = contentColor,
-                            )
-                        },
-                        label = {
-                            Text(stringResource(screen.resourceId), color = contentColor)
-                        },
-                        onClick = {
-                            navController.navigate(screen.route) {
-                                popUpTo(navController.graph.findStartDestination().id) {
-                                    saveState = true
-                                }
-                                launchSingleTop = true
-                                restoreState = true
-                            }
-                        },
-                    )
-                }
-            }
+            BrewzardBottomNavigation(navController)
         },
     ) { innerPadding ->
         NavHost(
@@ -132,6 +91,52 @@ fun AppNavigation() {
                 onShowMessage = showSnackbarMessage,
             )
         }
+    }
+}
+
+@Composable
+private fun BrewzardBottomNavigation(
+    navController: NavController,
+) = BottomNavigation(
+    modifier = Modifier
+        .background(colorScheme.primaryContainer)
+        .windowInsetsPadding(WindowInsets.navigationBars),
+    backgroundColor = colorScheme.primaryContainer,
+    elevation = 0.dp,
+) {
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentDestination = navBackStackEntry?.destination
+    bottomNavItems.forEach { screen ->
+        val selected = currentDestination?.hierarchy?.any {
+            it.route == screen.route
+        } == true
+        val contentColor = if (selected) {
+            colorScheme.onPrimaryContainer
+        } else {
+            Color.Gray
+        }
+        BottomNavigationItem(
+            selected = selected,
+            icon = {
+                Icon(
+                    screen.icon,
+                    contentDescription = null,
+                    tint = contentColor,
+                )
+            },
+            label = {
+                Text(stringResource(screen.resourceId), color = contentColor)
+            },
+            onClick = {
+                navController.navigate(screen.route) {
+                    popUpTo(navController.graph.findStartDestination().id) {
+                        saveState = true
+                    }
+                    launchSingleTop = true
+                    restoreState = true
+                }
+            },
+        )
     }
 }
 
