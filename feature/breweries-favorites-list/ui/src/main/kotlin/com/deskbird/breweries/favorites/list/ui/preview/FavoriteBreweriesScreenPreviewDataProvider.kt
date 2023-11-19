@@ -25,7 +25,6 @@ private fun createUiState(
 ) = StableFavoriteBreweriesScreenState(
     breweries = createPreviewBreweries(nrOfBreweries),
     progressIndicatorVisible = progressVisible,
-    errorVisible = errorVisible,
 )
 
 internal class FavoriteBreweriesScreenPreviewDataProvider :
@@ -33,6 +32,5 @@ internal class FavoriteBreweriesScreenPreviewDataProvider :
     override val values = sequenceOf(
         createUiState(),
         createUiState(progressVisible = true),
-        createUiState(errorVisible = true),
     )
 }
