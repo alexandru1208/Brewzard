@@ -15,6 +15,7 @@ dependencies {
     ksp(libs.room.compiler)
 
     implementation(project(":domain:api"))
+    testImplementation(project(":test:util"))
 }
 
 ksp {

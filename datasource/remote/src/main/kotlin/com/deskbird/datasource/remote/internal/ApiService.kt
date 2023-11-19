@@ -20,7 +20,7 @@ internal interface ApiService {
     @GET("breweries")
     suspend fun getBreweries(
         @Query("page") page: Int,
-        @Query("by_type") type: String?,
         @Query("per_page") pageSize: Int,
+        @Query("by_type") type: String?,
     ): List<BreweryApi>
 }

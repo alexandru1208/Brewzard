@@ -3,7 +3,7 @@ package com.deskbird.breweries.details
 import com.deskbird.domain.error.DataSourceException
 import com.deskbird.domain.repository.BreweryRepository
 import com.deskbird.test.data.TestBreweryFactory.createBrewery
-import com.deskbird.test.util.MainCoroutineRule
+import com.deskbird.test.util.CoroutinesTestExtension
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
@@ -11,16 +11,14 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
 import org.amshove.kluent.`should be equal to`
-import org.junit.Rule
-import org.junit.Test
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 
 private const val BREWERY_ID = "breweryId"
 
 @OptIn(ExperimentalCoroutinesApi::class)
+@ExtendWith(CoroutinesTestExtension::class)
 class BreweryDetailsViewModelTest {
-
-    @get:Rule
-    val coroutineRule = MainCoroutineRule()
 
     private val repository = mockk<BreweryRepository>(relaxed = true)
 

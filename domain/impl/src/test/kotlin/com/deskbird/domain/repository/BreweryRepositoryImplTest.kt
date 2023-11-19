@@ -1,11 +1,11 @@
 package com.deskbird.domain.repository
 
 import com.deskbird.domain.data.LocalBreweriesDataSource
-import com.deskbird.domain.data.RemoteBreweriesDataSource
+import com.deskbird.domain.data.RemoteBreweryDataSource
 import com.deskbird.domain.error.DataSourceException
 import com.deskbird.domain.model.BreweryType
 import com.deskbird.test.data.TestBreweryFactory.createBrewery
-import com.deskbird.test.util.MainCoroutineRule
+import com.deskbird.test.util.CoroutinesTestExtension
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
@@ -15,18 +15,16 @@ import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
 import org.amshove.kluent.`should be equal to`
-import org.junit.Rule
-import org.junit.Test
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 
 @OptIn(ExperimentalCoroutinesApi::class)
+@ExtendWith(CoroutinesTestExtension::class)
 class BreweryRepositoryImplTest {
 
-    @get:Rule
-    val coroutineRule = MainCoroutineRule()
-
-    private val coroutineScope = TestScope(coroutineRule.dispatcher)
+    private val coroutineScope = TestScope(CoroutinesTestExtension.dispatcher)
     private val localDataSource: LocalBreweriesDataSource = mockk(relaxed = true)
-    private val remoteDataSource: RemoteBreweriesDataSource = mockk(relaxed = true)
+    private val remoteDataSource: RemoteBreweryDataSource = mockk(relaxed = true)
 
     private val tested = BreweryRepositoryImpl(
         coroutineScope,
