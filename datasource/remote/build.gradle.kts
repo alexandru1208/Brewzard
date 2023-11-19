@@ -15,4 +15,5 @@ dependencies {
     implementation(libs.moshi.kotlin)
     ksp(libs.moshi.kotlin.codegen)
     implementation(project(":domain:api"))
+    testImplementation(project(":test:util"))
 }

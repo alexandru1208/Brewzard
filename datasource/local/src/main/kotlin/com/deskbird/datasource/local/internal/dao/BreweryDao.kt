@@ -24,7 +24,7 @@ internal interface BreweryDao {
     suspend fun insert(brewery: BreweryEntity)
 
     @Update
-    suspend fun update(vararg brewery: BreweryEntity)
+    suspend fun update(breweries: List<BreweryEntity>)
 
     @Delete
     suspend fun delete(brewery: BreweryEntity)

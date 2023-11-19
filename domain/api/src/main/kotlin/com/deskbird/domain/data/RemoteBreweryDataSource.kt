@@ -3,7 +3,7 @@ package com.deskbird.domain.data
 import com.deskbird.domain.model.Brewery
 import com.deskbird.domain.model.BreweryType
 
-interface RemoteBreweriesDataSource {
+interface RemoteBreweryDataSource {
 
     suspend fun getBrewery(id: String): Brewery
 

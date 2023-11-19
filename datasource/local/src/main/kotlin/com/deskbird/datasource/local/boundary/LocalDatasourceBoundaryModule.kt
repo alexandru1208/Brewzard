@@ -1,4 +1,4 @@
-package com.deskbird.datasource.local.external
+package com.deskbird.datasource.local.boundary
 
 import com.deskbird.datasource.local.internal.LocalBreweriesDataSourceImpl
 import com.deskbird.domain.data.LocalBreweriesDataSource
@@ -9,7 +9,7 @@ import dagger.hilt.components.SingletonComponent
 
 @Module
 @InstallIn(SingletonComponent::class)
-abstract class RoomExternalModule {
+abstract class LocalDatasourceBoundaryModule {
 
     @Binds
     internal abstract fun bindLocalBreweriesDataSource(
