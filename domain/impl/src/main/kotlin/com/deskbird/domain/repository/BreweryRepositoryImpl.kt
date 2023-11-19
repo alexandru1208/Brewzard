@@ -1,7 +1,7 @@
 package com.deskbird.domain.repository
 
 import com.deskbird.domain.data.LocalBreweriesDataSource
-import com.deskbird.domain.data.RemoteBreweriesDataSource
+import com.deskbird.domain.data.RemoteBreweryDataSource
 import com.deskbird.domain.di.ApplicationScope
 import com.deskbird.domain.error.DataSourceException
 import com.deskbird.domain.model.Brewery
@@ -19,7 +19,7 @@ import javax.inject.Singleton
 internal class BreweryRepositoryImpl @Inject constructor(
     @ApplicationScope private val applicationScope: CoroutineScope,
     private val localDatasource: LocalBreweriesDataSource,
-    private val remoteDataSource: RemoteBreweriesDataSource,
+    private val remoteDataSource: RemoteBreweryDataSource,
 ) : BreweryRepository {
 
     override suspend fun getBreweries(
