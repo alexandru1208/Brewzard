@@ -55,16 +55,15 @@ class BreweriesListViewModel @Inject constructor(
         if (type != state.value.selectedType) {
             pages.clear()
         }
+        _state.update {
+            it.copy(
+                selectedType = type,
+                breweries = pages.flatMap { page -> page.value },
+                progressIndicatorVisible = true,
+                errorVisible = false,
+            )
+        }
         viewModelScope.launch {
-            _state.update {
-                it.copy(
-                    selectedType = type,
-                    breweries = pages.flatMap { page -> page.value },
-                    progressIndicatorVisible = true,
-                    errorVisible = false,
-                )
-            }
-
             try {
                 val breweries = breweryRepository.getBreweries(page, PAGE_SIZE, type)
                 pages[page] = breweries

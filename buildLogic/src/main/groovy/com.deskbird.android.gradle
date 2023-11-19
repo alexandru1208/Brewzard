@@ -5,7 +5,11 @@ plugins {
 }
 
 android {
+    compileSdkVersion project.properties.compileSdk
+
     defaultConfig {
+        minSdkVersion project.properties.minSdk
+        targetSdkVersion project.properties.targetSdk
         vectorDrawables.useSupportLibrary = true
     }
 
@@ -19,16 +23,13 @@ android {
         jvmTarget = JavaVersion.VERSION_17.toString()
     }
 
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
-    }
-
-    compileSdkVersion project.properties.compileSdk
-
-    defaultConfig {
-        minSdkVersion project.properties.minSdk
-        targetSdkVersion project.properties.targetSdk
     }
 }
 
