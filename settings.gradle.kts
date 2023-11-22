@@ -20,7 +20,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Brewzard"
+rootProject.name = rootProject.projectDir.name
 include(fileTree(rootProject.projectDir)
     .filter { it.name == "build.gradle.kts" }
     .map { it.parent.replace(rootProject.projectDir.path, "").replace("/", ":") }
